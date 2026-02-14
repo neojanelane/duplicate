@@ -190,6 +190,13 @@
 
             slide.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
           });
+
+          // Because slides are absolutely positioned, the track needs an explicit height.
+          // Sync it to the active card so arrows center on the full card (not just the media area).
+          const active = slides[index];
+          if (active) {
+            track.style.height = active.offsetHeight + 'px';
+          }
         }
 
         function go(delta) {
@@ -197,8 +204,22 @@
           render();
         }
 
-        prevBtn.addEventListener('click', () => go(-1));
-        nextBtn.addEventListener('click', () => go(1));
+        prevBtn.addEventListener('click', (e) => { e.preventDefault(); go(-1); });
+        nextBtn.addEventListener('click', (e) => { e.preventDefault(); go(1); });
+
+        // Optional: click the peeking cards to move
+        slides.forEach((slide) => {
+          slide.addEventListener('click', () => {
+            if (slide.classList.contains('is-prev')) go(-1);
+            if (slide.classList.contains('is-next')) go(1);
+          });
+        });
+
+        // Keep height correct on resize
+        window.addEventListener('resize', () => {
+          // small defer so layout settles
+          window.requestAnimationFrame(render);
+        });
 
         // Keyboard support on the carousel region
         track.addEventListener('keydown', (e) => {
