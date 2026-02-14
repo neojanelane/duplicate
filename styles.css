@@ -31,15 +31,17 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== LAYOUT ===== */
 .container {
-  /* Consistent gutters so content never hugs the edges */
-  width: min(var(--container-width), calc(100% - 96px));
+  max-width: var(--container-width);
   margin: 0 auto;
+  padding: 0 48px; /* gutters on desktop */
 }
 
 @media (max-width: 960px) {
   .container {
-    width: min(var(--container-width), calc(100% - 48px));
+    padding: 0 24px; /* gutters on mobile */
   }
+}
+
 }
 
 .section {
@@ -61,12 +63,6 @@ a { text-decoration: none; color: inherit; }
 /* Extra breathing room visually for header row */
 .nav-inner {
   padding: 4px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
