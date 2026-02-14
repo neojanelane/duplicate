@@ -437,23 +437,4 @@ a { text-decoration: none; color: inherit; }
     align-items: flex-end;
   }
 }
-
-  .footer-brand {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .footer-top {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
-  .footer-links {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .footer-icons {
-    justify-content: flex-end;
-  }
 }
