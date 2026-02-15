@@ -218,27 +218,5 @@
       })();
     </script>
 
-    <!-- ================= WAITLIST (TEMP) ================= -->
-    <script>
-      (function () {
-        const form = document.querySelector('.waitlist-form');
-        if (!form) return;
-        const input = form.querySelector('#waitlist-email');
-        const success = form.querySelector('[data-success]');
-
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          if (!input || !success) return;
-
-          // Basic front-end validation only (no backend yet)
-          if (input.value && input.checkValidity()) {
-            success.hidden = false;
-          } else {
-            success.hidden = true;
-            input.focus();
-          }
-        });
-      })();
-    </script>
-  </body>
+    </body>
 </html>
