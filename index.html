@@ -50,7 +50,7 @@
       <div class="hero-bg" aria-hidden="true"></div>
 
       <div class="container hero-content">
-        <h1>DDon’t text 10 people.<br>Just book a game.</h1>
+        <h1>Don’t text 10 people.<br>Just book a game.</h1>
 
         <p class="hero-subtext">Book a game, split the cost, find a squad.</p>
 
@@ -129,12 +129,25 @@
           <h2>Stop cancelling. Start playing.</h2>
           <p class="signup-subtext">Join the waitlist now.</p>
 
+          <!-- Styled form (we can post to Google Sheets/Forms underneath later) -->
           <form class="waitlist-form" action="#" method="post" novalidate>
             <label class="sr-only" for="waitlist-email">Email</label>
+
             <div class="waitlist-row">
-              <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="123@xxx.com" required aria-describedby="waitlist-error waitlist-success">
+              <input
+                id="waitlist-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="123@xxx.com"
+                required
+                aria-describedby="waitlist-error waitlist-success"
+              />
+
               <button type="submit" class="btn btn-primary">Join Waitlist</button>
             </div>
+
             <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
             <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
           </form>
@@ -258,14 +271,15 @@
         const success = form.querySelector('[data-success]');
         const error = form.querySelector('[data-error]');
 
-        form.addEventListener('submit', function (e) {
+        form.addEventListener('submit', async function (e) {
           e.preventDefault();
-
           if (!input) return;
 
+          // Reset messages
           success.hidden = true;
           error.hidden = true;
 
+          // Validate
           if (!input.value) {
             error.textContent = 'Please provide your email to join the waitlist.';
             error.hidden = false;
@@ -280,15 +294,37 @@
             return;
           }
 
+          // Send to Google Forms (stores in Google Sheets)
+          // NOTE: This uses mode:no-cors, so we can't read a success response.
+          // We treat 'no network error thrown' as success.
+          try {
+            const fd = new FormData();
+            fd.append('entry.1326819543', input.value);
+
+            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse', {
+              method: 'POST',
+              mode: 'no-cors',
+              body: fd,
+            });
+          } catch (err) {
+            error.textContent = 'Something went wrong. Please try again.';
+            error.hidden = false;
+            return;
+          }
+
           success.hidden = false;
+
+          // Fire GTM event ONLY on valid submit
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'waitlist_submit' });
+
           input.value = '';
         });
 
         input.addEventListener('input', function () {
-          if (!error.hidden) error.hidden = true;
+          if (error && !error.hidden) error.hidden = true;
         });
       })();
     </script>
-
-    </body>
+  </body>
 </html>
