@@ -132,10 +132,11 @@
           <form class="waitlist-form" action="#" method="post" novalidate>
             <label class="sr-only" for="waitlist-email">Email</label>
             <div class="waitlist-row">
-              <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="123@xxx.com" required>
+              <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="123@xxx.com" required aria-describedby="waitlist-error waitlist-success">
               <button type="submit" class="btn btn-primary">Join Waitlist</button>
             </div>
-            <p class="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
+            <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
+            <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
           </form>
         </div>
 
@@ -178,111 +179,42 @@
     <!-- ================= CAROUSEL SCRIPT ================= -->
     <script>
       (function () {
-        const carousel = document.querySelector('[data-carousel]');
-        if (!carousel) return;
+        const form = document.querySelector('.waitlist-form');
+        if (!form) return;
 
-        const track = carousel.querySelector('[data-track]');
-        const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
-        const prevBtn = carousel.querySelector('[data-prev]');
-        const nextBtn = carousel.querySelector('[data-next]');
-        const tabs = Array.from(carousel.querySelectorAll('[data-tab]'));
-        const mq = window.matchMedia('(max-width: 960px)');
+        const input = form.querySelector('#waitlist-email');
+        const success = form.querySelector('[data-success]');
+        const error = form.querySelector('[data-error]');
 
-        let index = 0;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
 
-        function mod(n, m) {
-          return ((n % m) + m) % m;
-        }
+          if (!input) return;
 
-        function setActiveTab(i) {
-          tabs.forEach((t, ti) => {
-            const active = ti === i;
-            t.classList.toggle('is-active', active);
-            t.setAttribute('aria-selected', active ? 'true' : 'false');
-          });
-        }
+          success.hidden = true;
+          error.hidden = true;
 
-        function renderMobile(i) {
-          index = i;
-          slides.forEach((slide, si) => {
-            slide.classList.toggle('is-active', si === index);
-            slide.setAttribute('aria-hidden', si === index ? 'false' : 'true');
-          });
-          setActiveTab(index);
-          track.style.height = '';
-        }
-
-        function renderDesktop() {
-          slides.forEach((slide, i) => {
-            const raw = i - index;
-            const wrapped = raw > slides.length / 2 ? raw - slides.length : raw;
-            const offset = wrapped < -slides.length / 2 ? wrapped + slides.length : wrapped;
-
-            slide.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
-
-            if (offset === 0) slide.classList.add('is-active');
-            else if (offset === -1) slide.classList.add('is-prev');
-            else if (offset === 1) slide.classList.add('is-next');
-            else slide.classList.add('is-hidden');
-
-            slide.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
-          });
-
-          const active = slides[index];
-          if (active) track.style.height = active.offsetHeight + 'px';
-        }
-
-        function render() {
-          if (mq.matches) return renderMobile(index);
-          return renderDesktop();
-        }
-
-        function go(delta) {
-          if (mq.matches) {
-            renderMobile(mod(index + delta, slides.length));
+          if (!input.value) {
+            error.textContent = 'Please provide your email to join the waitlist.';
+            error.hidden = false;
+            input.focus();
             return;
           }
-          index = mod(index + delta, slides.length);
-          renderDesktop();
-        }
 
-        prevBtn.addEventListener('click', (e) => { e.preventDefault(); go(-1); });
-        nextBtn.addEventListener('click', (e) => { e.preventDefault(); go(1); });
+          if (!input.checkValidity()) {
+            error.textContent = 'Please provide a valid email to join the waitlist.';
+            error.hidden = false;
+            input.focus();
+            return;
+          }
 
-        // Click peeking cards (desktop)
-        slides.forEach((slide) => {
-          slide.addEventListener('click', () => {
-            if (mq.matches) return;
-            if (slide.classList.contains('is-prev')) go(-1);
-            if (slide.classList.contains('is-next')) go(1);
-          });
+          success.hidden = false;
+          input.value = '';
         });
 
-        // Keyboard (desktop)
-        track.addEventListener('keydown', (e) => {
-          if (mq.matches) return;
-          if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-          if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+        input.addEventListener('input', function () {
+          if (!error.hidden) error.hidden = true;
         });
-
-        // Tabs (mobile)
-        tabs.forEach((tab) => {
-          tab.addEventListener('click', () => {
-            const i = Number(tab.getAttribute('data-tab'));
-            renderMobile(i);
-          });
-        });
-
-        mq.addEventListener('change', () => {
-          index = 0;
-          render();
-        });
-
-        window.addEventListener('resize', () => {
-          window.requestAnimationFrame(render);
-        });
-
-        render();
       })();
     </script>
 
