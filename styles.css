@@ -319,7 +319,7 @@ a { text-decoration: none; color: inherit; }
 /* ===== SIGNUP ===== */
 .signup {
   display: grid;
-  grid-template-columns: 1.2fr 1fr; /* give more space to form side */
+  grid-template-columns: 1.2fr 1fr;
   gap: 40px;
   align-items: center;
 }
@@ -357,9 +357,8 @@ a { text-decoration: none; color: inherit; }
 .waitlist-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px; /* more breathing room */
+  gap: 18px;
   align-items: center;
-  width: 100%; /* allow full width of column */
 }
 
 .waitlist-row input {
