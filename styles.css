@@ -380,6 +380,12 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 0 0 4px rgba(255, 152, 106, 0.25);
 }
 
+.waitlist-error {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #b00020;
+}
+
 .waitlist-success {
   margin: 6px 0 0;
   font-size: 13px;
