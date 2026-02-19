@@ -370,9 +370,19 @@ a { text-decoration: none; color: inherit; }
   padding: 64px 0;
 }
 
+/* Full-bleed personas (no container window) */
+.personas-inner {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
 .personas-carousel {
   position: relative;
   overflow: hidden; /* hides off-screen cards */
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Track is translated left/right to move cards */
@@ -381,7 +391,7 @@ a { text-decoration: none; color: inherit; }
   gap: 22px;
   align-items: stretch;
   will-change: transform;
-  transition: transform 750ms cubic-bezier(0.22, 0.65, 0.3, 1);
+  transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
 }
 
 .personas-track.is-no-anim {
@@ -460,6 +470,16 @@ a { text-decoration: none; color: inherit; }
   color: var(--white);
   pointer-events: none;
   text-align: left;
+
+  /* Smooth fade-in synced with card zoom */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.persona-card.is-active .persona-overlay {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .persona-overlay::before {
