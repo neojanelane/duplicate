@@ -373,6 +373,7 @@ a { text-decoration: none; color: inherit; }
 .personas-carousel {
   position: relative;
   overflow: hidden; /* hides off-screen cards */
+  padding: 0 10vw; /* creates left/right peek without JS */
 }
 
 /* Track is translated left/right to move cards */
@@ -521,17 +522,6 @@ a { text-decoration: none; color: inherit; }
   .persona-card.is-active .persona-img--bottom { height: 140px; }
   .persona-overlay { padding: 16px; }
   .persona-sub { display: none; }
-}
-  .personas-track { gap: 12px; }
-  .persona-card { flex-basis: 31%; }
-  .persona-card.is-active { flex-basis: 38%; }
-  .persona-stack { padding: 10px; gap: 10px; }
-
-  .persona-img--top { height: 240px; }
-  .persona-img--bottom { height: 140px; }
-  .persona-overlay { padding: 14px; }
-  .persona-sub { display: none; }
-  .persona-trigger { font-size: 12px; padding: 8px 10px; }
 }
 
 /* ===== SIGNUP ===== */
