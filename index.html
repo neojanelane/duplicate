@@ -89,9 +89,19 @@
     </section>
 
     <!-- ================= FEATURES / BENEFITS ================= -->
-<section id="benefits" style="padding: 80px 0; background-color: #f8fafc; overflow: hidden;">
+<section id="benefits" style="padding: 60px 0; background-color: #f8fafc; overflow: hidden;">
   <style>
-    /* Desktop Default Styles */
+    /* Default Desktop Styles */
+    .benefits-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
     .phone-mockup {
       width: 420px;
       height: 800px;
@@ -100,66 +110,55 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.15);
     }
 
-    /* Mobile Optimization (Ensuring both fit on one screen) */
+    /* Mobile Optimization: Ensuring both fit on one screen */
     @media (max-width: 768px) {
       #benefits {
-        padding: 40px 0 !important; /* Reduce padding to save space */
-        height: 100vh; /* Optional: force section to fit screen height */
-        display: flex;
-        align-items: center;
+        padding: 30px 0 !important;
       }
-      
-      .container {
-        gap: 20px !important;
+      .benefits-flex-container {
         flex-direction: column !important;
-        justify-content: center !important;
-      }
-
-      .text-content {
+        gap: 20px !important;
         text-align: center;
+      }
+      .text-content {
         min-width: unset !important;
-        flex: 0 1 auto !important;
+        flex: unset !important;
       }
-
+      /* We keep the font family from your class but scale size for mobile visibility */
       #main-heading {
-        font-size: 24px !important; /* Smaller heading for mobile */
-        margin-bottom: 10px !important;
+        font-size: 28px !important; 
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
       }
-
-      #benefit-list li {
-        font-size: 14px !important; /* Compact list */
-        margin-bottom: 8px !important;
-      }
-
       .btn-primary {
-        padding: 10px 20px !important; /* Smaller button */
-        font-size: 14px;
+        padding: 12px 24px !important;
       }
-
       .mockup-container {
         min-width: unset !important;
         width: 100%;
-        flex: 1 !important;
-        margin-top: 10px !important;
+        margin-top: 0 !important;
       }
-
       .phone-mockup {
-        /* Use transform to scale down the iframe without breaking its internal layout */
-        width: 320px !important; 
-        height: 550px !important;
-        transform: scale(0.8); /* Shrinks the preview further to fit short screens */
+        width: 320px !important;
+        height: 580px !important;
+        transform: scale(0.85); /* Slightly larger scale than before */
         transform-origin: top center;
-        margin-bottom: -100px; /* Offset the scale pull */
+        margin-bottom: -80px; /* Adjusting for the scale overlap */
       }
     }
   </style>
 
-  <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding: 0 20px;">
-    
+  <div class="benefits-flex-container">
     <div class="text-content" style="flex: 1; min-width: 320px;"> 
-      <h2 id="main-heading" style="font-size: 42px; font-weight: 800; color: #1e293b; margin-bottom: 24px; line-height: 1.1;">Everything you need to play, in one app.</h2>
+      <h2 id="main-heading" class="plain-hero-title" style="color: #1e293b; margin-bottom: 24px; line-height: 1.1;">
+        Everything you need to play, in one app.
+      </h2>
+      
+      <ul id="benefit-list" style="list-style: none; padding: 0; margin: 0;"></ul>
 
-      <a href="#waitlist" class="btn btn-primary" style="padding: 16px 32px; border-radius: 12px; background-color: #e67e22; color: white; text-decoration: none; display: inline-block; font-weight: bold;">Join Waitlist</a>
+      <a href="#waitlist" class="btn btn-primary" style="padding: 16px 32px; border-radius: 12px; background-color: #e67e22; color: white; text-decoration: none; display: inline-block; font-weight: bold;">
+        Join Waitlist
+      </a>
     </div>
 
     <div class="mockup-container" style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
@@ -172,26 +171,15 @@
       const heading = document.getElementById("main-heading");
       const list = document.getElementById("benefit-list");
 
-      // Check if we are on mobile to use smaller font sizes in dynamic updates
-      const isMobile = window.innerWidth <= 768;
-      const listFontSize = isMobile ? "14px" : "18px";
-      const mb = isMobile ? "8px" : "16px";
-
       switch (event.data) {
         case "connect":
           heading.innerText = "Everything you need to play, in one app.";
-          list.innerHTML = `
-            <li style="margin-bottom: ${mb}; font-size: ${listFontSize}; color: #475569;"><strong>Book fast:</strong> Find local courts in Dublin instantly.</li>
-            <li style="margin-bottom: ${mb}; font-size: ${listFontSize}; color: #475569;"><strong>Fill the court:</strong> Get matched with nearby players.</li>
-            <li style="margin-bottom: ${mb}; font-size: ${listFontSize}; color: #475569;"><strong>Split automatically:</strong> Pay your share in seconds.</li>
-          `;
+          list.innerHTML = ""; 
           break;
-
         case "courts":
           heading.innerText = "Find courts near you";
           list.innerHTML = "";
           break;
-
         case "sports":
           heading.innerText = "Choose between different sports";
           list.innerHTML = "";
