@@ -33,21 +33,41 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" aria-label="Hero">
-      <!-- Background image (swap to video later) -->
-      <div class="hero-bg" aria-hidden="true"></div>
+      <!-- Background video (upload: videos/hero-bg.mp4) -->
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-bg.jpg" aria-hidden="true">
+        <source src="videos/hero-bg.mp4" type="video/mp4" />
+      </video>
 
       <div class="hero-logo" aria-label="Rulya logo">
         <img src="images/logo.png" alt="Rulya" />
       </div>
 
       <div class="container hero-content">
-        <h1>dDon’t text 10 people.<br>Just book a game.</h1>
+        <h1>Don’t text 10 people.<br>Just book a game.</h1>
 
         <p class="hero-subtext">Book a game, split the cost, find a squad.</p>
 
-        <div class="hero-buttons">
-          <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
-        </div>
+        <form class="waitlist-form hero-waitlist" action="#" method="post" novalidate>
+          <label class="sr-only" for="hero-email">Email</label>
+
+          <div class="waitlist-row">
+            <input
+              id="hero-email"
+              name="email"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder="123@xxx.com"
+              required
+              aria-describedby="hero-error hero-success"
+            />
+
+            <button type="submit" class="btn btn-primary">Join Waitlist</button>
+          </div>
+
+          <p class="waitlist-error" id="hero-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
+          <p class="waitlist-success" id="hero-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
+        </form>
 
         <p class="hero-secondary">
           <a href="#benefits">See how it works</a>
@@ -307,65 +327,84 @@
     <!-- ================= WAITLIST SCRIPT ================= -->
     <script>
       (function () {
-        const form = document.querySelector('.waitlist-form');
-        if (!form) return;
+        const forms = Array.from(document.querySelectorAll('.waitlist-form'));
+        if (!forms.length) return;
 
-        const input = form.querySelector('#waitlist-email');
-        const success = form.querySelector('[data-success]');
-        const error = form.querySelector('[data-error]');
+        const FORM_ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse';
+        const FORM_FIELD = 'entry.1326819543';
 
-        form.addEventListener('submit', async function (e) {
-          e.preventDefault();
-          if (!input) return;
+        function isEmailValid(input) {
+          // Uses native browser validation for type="email".
+          // Also trims whitespace so " test@x.com " doesn't fail.
+          const v = (input.value || '').trim();
+          input.value = v;
+          return v.length > 0 && input.checkValidity();
+        }
 
-          // Reset messages
-          success.hidden = true;
-          error.hidden = true;
+        forms.forEach((form) => {
+          const input = form.querySelector('input[type="email"]');
+          const success = form.querySelector('[data-success]');
+          const error = form.querySelector('[data-error]');
 
-          // Validate
-          if (!input.value) {
-            error.textContent = 'Please provide your email to join the waitlist.';
-            error.hidden = false;
-            input.focus();
-            return;
+          if (!input || !success || !error) return;
+
+          function resetMessages() {
+            success.hidden = true;
+            error.hidden = true;
           }
 
-          if (!input.checkValidity()) {
-            error.textContent = 'Please provide a valid email to join the waitlist.';
-            error.hidden = false;
-            input.focus();
-            return;
-          }
+          form.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-          // Send to Google Forms (stores in Google Sheets)
-          // NOTE: This uses mode:no-cors, so we can't read a success response.
-          // We treat 'no network error thrown' as success.
-          try {
-            const fd = new FormData();
-            fd.append('entry.1326819543', input.value);
+            resetMessages();
 
-            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse', {
-              method: 'POST',
-              mode: 'no-cors',
-              body: fd,
+            if (!input.value || !input.value.trim()) {
+              error.textContent = 'Please provide your email to join the waitlist.';
+              error.hidden = false;
+              input.focus();
+              return;
+            }
+
+            if (!isEmailValid(input)) {
+              error.textContent = 'Please provide a valid email to join the waitlist.';
+              error.hidden = false;
+              input.focus();
+              return;
+            }
+
+            // Send to Google Forms (stores in Google Sheets)
+            // NOTE: This uses mode:no-cors, so we can't read a success response.
+            // We treat 'no network error thrown' as success.
+            try {
+              const fd = new FormData();
+              fd.append(FORM_FIELD, input.value);
+
+              await fetch(FORM_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: fd,
+              });
+            } catch (err) {
+              error.textContent = 'Something went wrong. Please try again.';
+              error.hidden = false;
+              return;
+            }
+
+            success.hidden = false;
+
+            // Fire GTM event ONLY on valid submit
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'waitlist_submit',
+              form_location: form.classList.contains('hero-waitlist') ? 'hero' : 'waitlist_section',
             });
-          } catch (err) {
-            error.textContent = 'Something went wrong. Please try again.';
-            error.hidden = false;
-            return;
-          }
 
-          success.hidden = false;
+            input.value = '';
+          });
 
-          // Fire GTM event ONLY on valid submit
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'waitlist_submit' });
-
-          input.value = '';
-        });
-
-        input.addEventListener('input', function () {
-          if (error && !error.hidden) error.hidden = true;
+          input.addEventListener('input', function () {
+            if (error && !error.hidden) error.hidden = true;
+          });
         });
       })();
     </script>
