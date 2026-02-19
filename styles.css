@@ -379,17 +379,18 @@ a { text-decoration: none; color: inherit; }
 
 .personas-carousel {
   position: relative;
-  /* Allow the active card scale to remain fully visible vertically,
-     but still clip horizontally for the peek effect */
-  overflow-x: hidden;
-  overflow-y: visible;
+
+  /* Some browsers clip the other axis when mixing overflow-x/overflow-y.
+     Use overflow:hidden + padding so the scaled (active) card stays fully visible. */
+  overflow: hidden;
 
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
 
   /* breathing room so scaled card isn't clipped top/bottom */
-  padding: 22px 0;
+  padding: 36px 0;
+  box-sizing: border-box;
 }
 
 /* Track is translated left/right to move cards */
@@ -450,7 +451,10 @@ a { text-decoration: none; color: inherit; }
   position: relative;
 }
 
-/* Optional label so you can still tell top vs bottom */
+/* IMPORTANT: give the image boxes height on desktop too */
+.persona-img--top { height: 380px; }
+.persona-img--bottom { height: 220px; }
+
 .persona-img-label {
   position: absolute;
   left: 12px;
