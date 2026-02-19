@@ -122,24 +122,39 @@
             <!-- RIGHT: vertical media stack (phone/video placeholder) -->
             <div class="benefits-right" aria-label="Benefit preview">
               <div class="benefits-media">
- <style>
-  /* This part ensures the mockup looks good on phones */
+<style>
+  /* This container handles the layout */
+  .mockup-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Keeps it on the right for Desktop */
+    padding: 20px 0;
+  }
+  .responsive-iframe {
+    width: 450px; 
+    height: 800px; 
+    border: none; 
+    border-radius: 32px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  }
+  /* Force change for Mobile phones */
   @media (max-width: 768px) {
+    .mockup-container {
+      justify-content: center; /* Center it on mobile */
+    }
     .responsive-iframe {
-      width: 100% !important;
+      width: 90% !important; /* Take up most of the screen width */
+      height: 600px !important; /* Shorter for vertical scrolling */
       float: none !important;
-      margin-left: 0 !important;
-      margin-top: 20px;
-      height: 600px !important; /* Slightly shorter for phone screens */
     }
   }
 </style>
-<iframe 
-  src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
-  class="responsive-iframe"
-  style="width: 450px; height: 800px; border: none; border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); float: right; margin-left: 40px;"
-  title="Rulya App Mockup">
-</iframe>
+<div class="mockup-container">
+  <iframe 
+    src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
+    class="responsive-iframe"
+    title="Rulya App Mockup">
+  </iframe>
 </div>
                   <div class="feature-media" aria-hidden="true"></div>
                 </div>
