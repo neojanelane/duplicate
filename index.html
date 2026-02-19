@@ -126,9 +126,21 @@
     /* Desktop: Right-side. Mobile: Centered stack. */
     .mockup-wrapper { flex: 0 0 450px; max-width: 100%; position: relative; z-index: 10; }
     @media (max-width: 1000px) {
-      .benefits-media-container { justify-content: center !important; }
-      .mockup-wrapper { flex: 0 0 100% !important; display: flex; justify-content: center; }
-      .responsive-iframe { width: 350px !important; height: 650px !important; }
+      .benefits-media-container { 
+        display: block !important; 
+        width: 100% !important; 
+      }
+      .mockup-wrapper { 
+        display: flex !important; 
+        justify-content: center !important; 
+        width: 100% !important; 
+        margin-top: 50px !important;
+        height: 700px !important; /* This forces the space to appear */
+      }
+      .responsive-iframe { 
+        width: 320px !important; 
+        height: 650px !important; 
+      }
     }
   </style>
 
