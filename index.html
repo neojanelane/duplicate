@@ -121,40 +121,32 @@
 
             <!-- RIGHT: vertical media stack (phone/video placeholder) -->
             <div class="benefits-right" aria-label="Benefit preview">
-        <div class="benefits-media-container" style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: flex-start; gap: 20px; width: 100%;">
+        <div class="desktop-only-mockup" style="display: flex; justify-content: flex-end; width: 100%;">
   <style>
-    /* Desktop: Right-side. Mobile: Centered stack. */
-    .mockup-wrapper { flex: 0 0 450px; max-width: 100%; position: relative; z-index: 10; }
-    @media (max-width: 1000px) {
-      .benefits-media-container { 
-        display: block !important; 
-        width: 100% !important; 
-      }
-      .mockup-wrapper { 
-        display: flex !important; 
-        justify-content: center !important; 
-        width: 100% !important; 
-        margin-top: 50px !important;
-        height: 700px !important; /* This forces the space to appear */
-      }
-      .responsive-iframe { 
-        width: 320px !important; 
-        height: 650px !important; 
-      }
-    }
+    @media (max-width: 1000px) { .desktop-only-mockup { display: none !important; } }
   </style>
-
-  <div class="mockup-wrapper">
-    <iframe 
-      src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
-      class="responsive-iframe"
-      style="width: 100%; height: 850px; border: none; border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);"
-      title="Rulya App Mockup">
-    </iframe>
+  <div style="flex: 0 0 450px;">
+    <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
+            style="width: 100%; height: 850px; border: none; border-radius: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.2);"></iframe>
   </div>
 </div>
-</div> 
-</section>
+
+<div class="mobile-only-mockup" style="display: none; width: 100%; padding: 40px 0;">
+  <style>
+    @media (max-width: 1000px) { .mobile-only-mockup { display: block !important; } }
+  </style>
+  <div style="display: flex; justify-content: center;">
+    <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
+            style="width: 320px; height: 600px; border: none; border-radius: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></iframe>
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+      <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" 
+              style="width: 320px; height: 600px; border: none; border-radius: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></iframe>
+    </div>
+  </div>
+</div> </section> ```
 
     <!-- ================= SIGNUP ================= -->
     <section id="waitlist" class="section section-ice" aria-label="Waitlist">
