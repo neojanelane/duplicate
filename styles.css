@@ -97,26 +97,11 @@ a { text-decoration: none; color: inherit; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 150px 0 80px; /* +50px taller, more space above heading */
-  background: var(--ice); /* fallback if image/video not loaded */
+  padding: 150px 0 80px; /* space above heading to see video */
+  background: var(--ice); /* fallback if video fails */
 }
 
-.hero--plain {
-  background: var(--ice);
-}
-
-.hero--plain .hero-bg,
-.hero--plain .hero-logo {
-  display: none;
-}
-
-/* Give the media hero a little readable backing without changing video opacity */
-.hero:not(.hero--plain) .hero-content {
-  text-shadow: 0 2px 18px rgba(22, 30, 84, 0.25);
-}
-
-
-/* Background video layer (upload: videos/hero-bg.mp4) */
+/* Video layer */
 .hero-video {
   position: absolute;
   inset: 0;
@@ -126,23 +111,22 @@ a { text-decoration: none; color: inherit; }
   object-position: center;
   pointer-events: none;
   z-index: 0;
+  display: block;
+  background: var(--ice); /* avoids black flash before first frame on some mobiles */
 }
 
-/* Blue overlay over video (replicates previous image opacity look) */
+/* Blue tint overlay over the video */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: var(--ice);
-  opacity: 0.20; /* matches previous 0.22 image opacity effect */
+  background: rgba(187, 224, 239, 0.2); /* --ice at 20% */
   pointer-events: none;
   z-index: 1;
 }
 
-/* Fallback: if video can't play, the poster (images/hero-bg.jpg) will show */
-
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
 }
 
@@ -152,7 +136,7 @@ a { text-decoration: none; color: inherit; }
   top: 30px;
   left: 36px;
   margin: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-logo img {
@@ -161,34 +145,18 @@ a { text-decoration: none; color: inherit; }
   display: block;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.hero-content { text-align: center; }
-
 .hero h1 {
   font-family: 'ZT Otez', 'Inter', sans-serif;
   font-size: clamp(36px, 5vw, 64px);
   line-height: 1.05;
   margin: 0 0 24px;
   font-weight: 400; /* ZT Otez only has regular */
-  color: var(--midnight);
-}
-
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
+  color: var(--white);
 }
 
 .hero-subtext {
   font-size: 18px;
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.88);
   margin: 0 0 22px;
 }
 
@@ -206,7 +174,6 @@ a { text-decoration: none; color: inherit; }
   text-align: left;
 }
 
-
 .hero-secondary {
   margin: 8px 0 60px;
   font-size: 14px;
@@ -220,6 +187,35 @@ a { text-decoration: none; color: inherit; }
 
 .hero-secondary a:hover {
   color: var(--coral);
+}
+
+/* Plain hero: solid ice background, no video / overlay / logo */
+.hero--plain {
+  background: var(--ice);
+  padding: 70px 0 70px;
+}
+
+.hero--plain .hero-video,
+.hero--plain .hero-overlay,
+.hero--plain .hero-logo {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  /* Keep logo from overlapping hero text on mobile */
+  .hero-logo {
+    top: 28px;
+    left: 28px;
+  }
+
+  .hero-logo img { width: 26px; }
+
+  /* Extra top padding so text never collides with logo */
+  .hero { padding-top: 170px; }
+
+  /* Hero form stacks nicely */
+  .hero-waitlist .waitlist-row { grid-template-columns: 1fr; }
+  .hero-waitlist .btn { width: 100%; }
 }
 
 
