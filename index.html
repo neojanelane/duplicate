@@ -89,14 +89,15 @@
     </section>
 
     <!-- ================= FEATURES / BENEFITS ================= -->
-   <section id="benefits" style="padding: 80px 0; background-color: #f8fafc; overflow: hidden;">
+  <section id="benefits" style="padding: 80px 0; background-color: #f8fafc; overflow: hidden;">
   <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding: 0 20px;">
     
     <div style="flex: 1; min-width: 320px;">
       <p style="color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; font-size: 14px; letter-spacing: 0.05em;">How it works</p>
-      <h2 style="font-size: 42px; font-weight: 800; color: #1e293b; margin-bottom: 24px; line-height: 1.1;">Everything you need to play, in one app.</h2>
       
-      <ul style="list-style: none; padding: 0; margin-bottom: 40px;">
+      <h2 id="main-heading" style="font-size: 42px; font-weight: 800; color: #1e293b; margin-bottom: 24px; line-height: 1.1;">Everything you need to play, in one app.</h2>
+      
+      <ul id="benefit-list" style="list-style: none; padding: 0; margin-bottom: 40px;">
         <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Book fast:</strong> Find local courts in Dublin instantly.</li>
         <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Fill the court:</strong> Get matched with nearby players.</li>
         <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Split automatically:</strong> Pay your share in seconds.</li>
@@ -124,8 +125,38 @@
       </style>
       <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup"></iframe>
     </div>
-
   </div>
+
+  <script>
+    window.addEventListener("message", (event) => {
+      // It is good practice to check the origin for security:
+      // if (event.origin !== "https://v0-rulya-social-booking-app-i2e1.vercel.app") return;
+
+      const heading = document.getElementById("main-heading");
+      const list = document.getElementById("benefit-list");
+
+      switch (event.data) {
+        case "connect":
+          heading.innerText = "Everything you need to play, in one app.";
+          list.innerHTML = `
+            <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Book fast:</strong> Find local courts in Dublin instantly.</li>
+            <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Fill the court:</strong> Get matched with nearby players.</li>
+            <li style="margin-bottom: 16px; font-size: 18px; color: #475569;"><strong>Split automatically:</strong> Pay your share in seconds.</li>
+          `;
+          break;
+
+        case "courts":
+          heading.innerText = "Find courts near you";
+          list.innerHTML = ""; // Clears list for this state
+          break;
+
+        case "sports":
+          heading.innerText = "Choose between different sports";
+          list.innerHTML = ""; // Clears list for this state
+          break;
+      }
+    });
+  </script>
 </section>
     <!-- ================= SIGNUP ================= -->
     <section id="waitlist" class="section section-ice" aria-label="Waitlist">
