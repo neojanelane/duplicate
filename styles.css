@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 @font-face {
   font-family: 'ZT Otez';
   src: url('fonts/zt-otez.regular.woff2') format('woff2');
@@ -45,6 +48,8 @@ a { text-decoration: none; color: inherit; }
 .section {
   padding: 60px 0;
   background: var(--white);
+  /* Ensures smooth scroll doesn't land flush against the top edge */
+  scroll-margin-top: 20px; 
 }
 
 .section-ice {
@@ -97,7 +102,8 @@ a { text-decoration: none; color: inherit; }
 /* Ensure the hero takes up the full mobile height */
 .hero {
   position: relative;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Magic fix: Dynamic Viewport Height */
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -317,6 +323,8 @@ a { text-decoration: none; color: inherit; }
   transform: scale(1.10);
   opacity: 0.55;
   pointer-events: none;
+  /* Tells the browser to optimize this layer */
+  will-change: transform; 
 }
 
 .benefits-layout {
@@ -484,9 +492,9 @@ a { text-decoration: none; color: inherit; }
   gap: 22px;
   align-items: stretch;
   will-change: transform;
+  backface-visibility: hidden; /* Prevents 1px shifting/jumps after animation */
   transition: transform 900ms cubic-bezier(0.22, 0.65, 0.3, 1);
 }
-
 .personas-track.is-no-anim {
   transition: none !important;
 }
