@@ -1,8 +1,9 @@
 {
   "name": "rulya-landing",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "npx serve -l 3000 .",
-    "start": "npx serve -l 3000 ."
+    "dev": "node scripts/start-server.js",
+    "start": "node scripts/start-server.js"
   }
 }
