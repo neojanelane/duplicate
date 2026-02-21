@@ -1,5 +1,4 @@
 html {
-  scroll-behavior: smooth;
 }
 @font-face {
   font-family: 'ZT Otez';
@@ -70,10 +69,6 @@ a { text-decoration: none; color: inherit; }
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 
-.btn-small {
-  padding: 8px 14px;
-  border-radius: 999px;
-}
 
 .btn-primary {
   background: var(--orange);
@@ -87,16 +82,6 @@ a { text-decoration: none; color: inherit; }
 
 .btn-primary:hover { background: var(--coral); }
 
-.btn-secondary {
-  background: transparent;
-  color: var(--midnight);
-  border-color: rgba(22, 30, 84, 0.25);
-}
-
-.btn-secondary:hover {
-  border-color: var(--coral);
-  color: var(--coral);
-}
 
 /* ===== HERO ===== */
 /* Ensure the hero takes up the full mobile height */
@@ -192,20 +177,6 @@ a { text-decoration: none; color: inherit; }
   text-align: left;
 }
 
-.hero-secondary {
-  margin: 8px 0 60px;
-  font-size: 14px;
-}
-
-.hero-secondary a {
-  color: var(--midnight);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.hero-secondary a:hover {
-  color: var(--coral);
-}
 
 /* ===== ORIGIN STORY (FUTURE.CO STYLE UPGRADE) ===== */
 .hero--plain {
@@ -343,7 +314,28 @@ a { text-decoration: none; color: inherit; }
 .benefits-section .benefits-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.benefits-section .benefits-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--midnight);
+  opacity: 0.92;
+}
+
+.benefits-section .benefits-list li::before {
+  content: "✓";
+  display: inline-block;
+  font-weight: 800;
+  line-height: 1;
+  margin-top: 2px;
+  color: var(--orange);
 }
 
 .benefits-section .benefits-cta {
