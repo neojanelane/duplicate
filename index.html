@@ -45,7 +45,7 @@
       </div>
 
       <div class="container hero-content">
-        <h1>hGet the ball rolling</h1>
+        <h1>Get the ball rolling</h1>
 
         <p class="hero-subtext">Instantly book local courts, join active matches, and connect with other players across Dublin.</p>
 
@@ -249,7 +249,6 @@
     <section class="section section-ice personas" aria-label="Personas">
       <div class="personas-inner">
         <div class="personas-carousel" data-persona-carousel>
-
           <div class="personas-track" data-persona-track aria-roledescription="carousel">
             <!-- Persona 1 -->
             <article class="persona-card is-active" data-persona-slide
@@ -300,8 +299,7 @@
               <div class="persona-overlay" aria-hidden="true"></div>
             </article>
           </div>
-
-          </div>
+        </div>
       </div>
     </section>
 
@@ -335,45 +333,6 @@
 
       </div>
     </footer>
-
-    <!-- ================= BENEFITS SCRIPT ================= -->
-    <script>
-      (function () {
-        const root = document.querySelector('[data-carousel]');
-        if (!root) return;
-
-        const slides = Array.from(root.querySelectorAll('[data-slide]'));
-        const tabs = Array.from(root.querySelectorAll('[data-tab]'));
-
-        let currentIndex = 0;
-
-        function update() {
-          tabs.forEach((tab, i) => {
-            const active = i === currentIndex;
-            tab.classList.toggle('is-active', active);
-            tab.setAttribute('aria-selected', active ? 'true' : 'false');
-          });
-
-          slides.forEach((slide, i) => {
-            slide.classList.toggle('is-active', i === currentIndex);
-          });
-        }
-
-        function goTo(index) {
-          currentIndex = (index + slides.length) % slides.length;
-          update();
-        }
-
-        tabs.forEach((tab) => {
-          tab.addEventListener('click', () => {
-            const idx = Number(tab.getAttribute('data-tab'));
-            if (!Number.isNaN(idx)) goTo(idx);
-          });
-        });
-
-        update();
-      })();
-    </script>
 
     <!-- ================= WAITLIST SCRIPT ================= -->
     <script>
