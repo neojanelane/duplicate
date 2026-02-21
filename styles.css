@@ -418,7 +418,7 @@ a { text-decoration: none; color: inherit; }
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 45px 0;
+  padding: 30px 0;
 }
 
 .hero--plain::before { display: none; }
@@ -480,8 +480,8 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 960px) {
   /* Shorter hero on mobile so scroll is obvious */
   .hero {
-    height: 75vh;
-    height: 75dvh;
+    height: 78vh;
+    height: 78dvh;
   }
 
   .container { padding: 0 24px; }
