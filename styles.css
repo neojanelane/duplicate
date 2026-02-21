@@ -41,13 +41,19 @@ a { text-decoration: none; color: inherit; }
 
 /* Background gradient for the full page area (Origin → Footer) */
 .page-gradient {
-  background: linear-gradient(
+  /* One continuous fade from white → ice, then stays ice to the bottom */
+  background-color: var(--ice);
+  background-image: linear-gradient(
     to bottom,
     var(--white) 0%,
-    var(--ice) 18%,
-    var(--ice) 72%,
-    var(--white) 100%
+    var(--ice) 35%,
+    var(--ice) 100%
   );
+}
+
+/* Inside the gradient wrapper, let the wrapper show through (avoid hard white cuts) */
+.page-gradient .section {
+  background: transparent;
 }
 
 .container {
@@ -74,34 +80,7 @@ a { text-decoration: none; color: inherit; }
   background: transparent;
 }
 
-/* Use these ONLY on the first/last section in a run of blue sections */
-.section-ice--top {
-  background: linear-gradient(
-    to bottom,
-    var(--white) 0%,
-    var(--ice) 40%,
-    var(--ice) 100%
-  );
-}
-
-.section-ice--bottom {
-  background: linear-gradient(
-    to bottom,
-    var(--ice) 0%,
-    var(--ice) 60%,
-    var(--white) 100%
-  );
-}
-
-.section-ice--both {
-  background: linear-gradient(
-    to bottom,
-    var(--white) 0%,
-    var(--ice) 35%,
-    var(--ice) 65%,
-    var(--white) 100%
-  );
-}
+/* (Removed) per-section gradients: the wrapper handles the fade now */
 
 /* ===== BUTTONS ===== */
 .btn {
