@@ -38,6 +38,18 @@ body {
 a { text-decoration: none; color: inherit; }
 
 /* ===== LAYOUT ===== */
+
+/* Background gradient for the full page area (Origin → Footer) */
+.page-gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--white) 0%,
+    var(--ice) 18%,
+    var(--ice) 72%,
+    var(--white) 100%
+  );
+}
+
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -52,7 +64,14 @@ a { text-decoration: none; color: inherit; }
 }
 
 .section-ice {
-  background: var(--ice);
+  background: transparent;
+}
+
+/* These classes remain for flexibility, but the global gradient handles transitions */
+.section-ice--top,
+.section-ice--bottom,
+.section-ice--both {
+  background: transparent;
 }
 
 /* Use these ONLY on the first/last section in a run of blue sections */
@@ -210,7 +229,7 @@ a { text-decoration: none; color: inherit; }
 /* ===== ORIGIN STORY (FUTURE.CO STYLE UPGRADE) ===== */
 .hero--plain {
   position: relative;
-  background-color: var(--ice);
+  background-color: transparent;
   /* Mesh Gradient: Adds high-energy depth behind the seagull */
   background-image: 
     radial-gradient(circle at 20% 30%, rgba(241, 109, 52, 0.18) 0%, transparent 50%),
@@ -221,19 +240,8 @@ a { text-decoration: none; color: inherit; }
   padding: 100px 0;
 }
 
-/* Add a sporty pitch-line texture using an overlay */
-.hero--plain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.08;
-  background-image: 
-    linear-gradient(var(--midnight) 1px, transparent 1px),
-    linear-gradient(90deg, var(--midnight) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Removed pitch-line grid texture (squares) */
+.hero--plain::before { display: none; }
 
 /* Origin Content Layout */
 .origin {
@@ -315,7 +323,7 @@ a { text-decoration: none; color: inherit; }
 /* ===== BENEFITS (iframe mockup section) ===== */
 .benefits-section {
   padding: 60px 0;
-  background-color: #f8fafc;
+  background: transparent;
   overflow: hidden;
 }
 
@@ -720,10 +728,9 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== FOOTER ===== */
 .footer {
-
   border-top: 1px solid var(--border);
   padding: 40px 0;
-  background: var(--white);
+  background: transparent;
 }
 
 .footer-grid {
