@@ -483,16 +483,17 @@ a { text-decoration: none; color: inherit; }
     height: 75vh;
     height: 75dvh;
   }
-  }
 
   .container { padding: 0 24px; }
 
+  /* Hero logo placement */
   .hero-logo {
     top: 18px;
     left: 18px;
   }
   .hero-logo img { width: 26px; }
 
+  /* Origin stacks on mobile */
   .origin {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -503,6 +504,7 @@ a { text-decoration: none; color: inherit; }
   .origin-copy { text-align: center; }
   .plain-hero-sub { margin: 0 auto; }
 
+  /* Benefits stacks on mobile (fix iframe sliver/left align) */
   .benefits-flex-container {
     flex-direction: column;
     gap: 20px;
@@ -526,6 +528,7 @@ a { text-decoration: none; color: inherit; }
     margin-bottom: -80px;
   }
 
+  /* Personas: full-screen cards on mobile */
   .personas { padding: 0; }
   .personas-carousel { padding: 0; }
   .personas-track { gap: 0; }
@@ -540,6 +543,7 @@ a { text-decoration: none; color: inherit; }
     opacity: 1;
   }
 
+  /* Remove trim padding so the image is truly full-screen */
   .persona-stack { padding: 0; }
   .persona-img--top { height: 100%; min-height: 100%; border-radius: 0; }
 
