@@ -88,22 +88,79 @@
     </section>
 
     <!-- ================= FEATURES / BENEFITS ================= -->
-<section id="benefits" class="benefits-section">
+<section id="benefits" style="padding: 60px 0; background-color: #f8fafc; overflow: hidden;">
+  <style>
+    /* Default Desktop Styles */
+    .benefits-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .phone-mockup {
+      width: 420px;
+      height: 800px;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    /* Mobile Optimization: Ensuring both fit on one screen */
+    @media (max-width: 768px) {
+      #benefits {
+        padding: 30px 0 !important;
+      }
+      .benefits-flex-container {
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: center;
+      }
+      .text-content {
+        min-width: unset !important;
+        flex: unset !important;
+      }
+      /* We keep the font family from your class but scale size for mobile visibility */
+      #main-heading {
+        font-size: 28px !important; 
+        margin-bottom: 15px !important;
+        line-height: 1.2 !important;
+      }
+      .btn-primary {
+        padding: 12px 24px !important;
+      }
+      .mockup-container {
+        min-width: unset !important;
+        width: 100%;
+        margin-top: 0 !important;
+      }
+      .phone-mockup {
+        width: 320px !important;
+        height: 580px !important;
+        transform: scale(0.85); /* Slightly larger scale than before */
+        transform-origin: top center;
+        margin-bottom: -80px; /* Adjusting for the scale overlap */
+      }
+    }
+  </style>
 
   <div class="benefits-flex-container">
-    <div class="text-content"> 
-      <h2 id="main-heading" class="plain-hero-title benefits-heading">
+    <div class="text-content" style="flex: 1; min-width: 320px;"> 
+      <h2 id="main-heading" class="plain-hero-title" style="color: #1e293b; margin-bottom: 24px; line-height: 1.1;">
         Everything you need to play, in one app.
       </h2>
       
-      <ul id="benefit-list" class="benefits-list"></ul>
+      <ul id="benefit-list" style="list-style: none; padding: 0; margin: 0;"></ul>
 
-      <a href="#waitlist" class="btn btn-primary benefits-cta">
+      <a href="#waitlist" class="btn btn-primary" style="padding: 16px 32px; border-radius: 12px; background-color: #F16D34; color: white; text-decoration: none; display: inline-block; font-weight: bold;">
         Join Waitlist
       </a>
     </div>
 
-    <div class="mockup-container">
+    <div class="mockup-container" style="flex: 1; min-width: 320px; display: flex; justify-content: center;">
       <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
     </div>
   </div>
@@ -192,17 +249,15 @@
     <section class="section section-ice personas" aria-label="Personas">
       <div class="personas-inner">
         <div class="personas-carousel" data-persona-carousel>
+
           <div class="personas-track" data-persona-track aria-roledescription="carousel">
             <!-- Persona 1 -->
-            <article
-              class="persona-card is-active"
-              data-persona-slide
+            <article class="persona-card is-active" data-persona-slide
               data-name="Young Professional"
               data-headline="After work shouldn’t mean after 10 messages."
               data-sub="You’ve the energy. You’ve the schedule. You just don’t have the group chat organised."
               data-trigger="Game found in 2 taps. Court booked. Cost split"
-              data-cta="Join waitlist"
-            >
+              data-cta="Join waitlist">
               <div class="persona-stack" aria-hidden="true">
                 <div class="persona-img persona-img--top" aria-hidden="true"></div>
                 <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
@@ -218,15 +273,12 @@
             </article>
 
             <!-- Persona 2 -->
-            <article
-              class="persona-card"
-              data-persona-slide
+            <article class="persona-card" data-persona-slide
               data-name="Expat / New in Dublin"
               data-headline="New city. No squad."
               data-sub="You didn’t move countries to stay in."
               data-trigger="Casual badminton 2km away. 4 spots left."
-              data-cta="Join waitlist"
-            >
+              data-cta="Join waitlist">
               <div class="persona-stack" aria-hidden="true">
                 <div class="persona-img persona-img--top" aria-hidden="true"></div>
                 <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
@@ -235,15 +287,12 @@
             </article>
 
             <!-- Persona 3 -->
-            <article
-              class="persona-card"
-              data-persona-slide
+            <article class="persona-card" data-persona-slide
               data-name="Student"
               data-headline="Midday class break? Tight budget?"
               data-sub="Daytime courts. Student-friendly pricing."
               data-trigger="4 players × €8. Split automatically"
-              data-cta="Join waitlist"
-            >
+              data-cta="Join waitlist">
               <div class="persona-stack" aria-hidden="true">
                 <div class="persona-img persona-img--top" aria-hidden="true"></div>
                 <div class="persona-img persona-img--bottom" aria-hidden="true"></div>
@@ -251,7 +300,8 @@
               <div class="persona-overlay" aria-hidden="true"></div>
             </article>
           </div>
-        </div>
+
+          </div>
       </div>
     </section>
 
@@ -285,6 +335,45 @@
 
       </div>
     </footer>
+
+    <!-- ================= BENEFITS SCRIPT ================= -->
+    <script>
+      (function () {
+        const root = document.querySelector('[data-carousel]');
+        if (!root) return;
+
+        const slides = Array.from(root.querySelectorAll('[data-slide]'));
+        const tabs = Array.from(root.querySelectorAll('[data-tab]'));
+
+        let currentIndex = 0;
+
+        function update() {
+          tabs.forEach((tab, i) => {
+            const active = i === currentIndex;
+            tab.classList.toggle('is-active', active);
+            tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+
+          slides.forEach((slide, i) => {
+            slide.classList.toggle('is-active', i === currentIndex);
+          });
+        }
+
+        function goTo(index) {
+          currentIndex = (index + slides.length) % slides.length;
+          update();
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const idx = Number(tab.getAttribute('data-tab'));
+            if (!Number.isNaN(idx)) goTo(idx);
+          });
+        });
+
+        update();
+      })();
+    </script>
 
     <!-- ================= WAITLIST SCRIPT ================= -->
     <script>
