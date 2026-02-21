@@ -584,6 +584,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 960px) {
+  .container { padding: 0 24px; }
+
   /* Keep logo from overlapping hero text on mobile */
   .hero-logo {
     top: 18px;
@@ -597,7 +599,7 @@ a { text-decoration: none; color: inherit; }
   .hero-waitlist .waitlist-row { grid-template-columns: 1fr; }
   .hero-waitlist .btn { width: 100%; }
 
-
+  /* Personas */
   .personas { padding: 48px 0; }
   .personas-track { gap: 14px; }
   .persona-card { flex-basis: 86vw; }
@@ -607,6 +609,22 @@ a { text-decoration: none; color: inherit; }
   .persona-card.is-active .persona-img--bottom { height: 140px; }
   .persona-overlay { padding: 16px; }
   .persona-sub { display: none; }
+
+  /* Signup */
+  .signup { grid-template-columns: 1fr; }
+
+  .waitlist-row {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .signup-visual {
+    height: 220px;
+  }
 }
 
 /* ===== SIGNUP ===== */
@@ -763,25 +781,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 960px) {
-  .container { padding: 0 24px; }
-
-    /* Signup */
-  .signup { grid-template-columns: 1fr; }
-
-  .waitlist-row {
-    grid-template-columns: 1fr;
-  }
-
-  .waitlist-row .btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .signup-visual {
-    height: 220px;
-  }
-}
 
 @media (min-width: 961px) {
   .footer-grid {
