@@ -686,6 +686,24 @@ a { text-decoration: none; color: inherit; }
   background-position: center;
 }
 
+/* Ensure Signup stacks on mobile (placed AFTER the base .signup rules so it wins) */
+@media (max-width: 960px) {
+  .signup { grid-template-columns: 1fr; }
+
+  .waitlist-row {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .signup-visual {
+    height: 220px;
+  }
+}
+
 /* ===== FOOTER ===== */
 .footer {
 
