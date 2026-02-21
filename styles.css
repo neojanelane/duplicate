@@ -478,6 +478,13 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 960px) {
+  /* Shorter hero on mobile so scroll is obvious */
+  .hero {
+    height: 75vh;
+    height: 75dvh;
+  }
+  }
+
   .container { padding: 0 24px; }
 
   .hero-logo {
