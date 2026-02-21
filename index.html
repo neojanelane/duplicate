@@ -118,47 +118,37 @@
 
     if (!iframe || !heading || !list) return;
 
-    // Content helpers
-    function setBenefits(state) {
-      switch (state) {
-        case 'connect':
-          heading.innerText = 'Everything you need to play, in one app.';
-          list.innerHTML = `
-            <li>Join matches that fit your schedule.</li>
-            <li>Message players and confirm quickly.</li>
-            <li>Skip the group-chat chaos.</li>
-          `;
-          break;
-        case 'courts':
-          heading.innerText = 'Find courts near you';
-          list.innerHTML = `
-            <li>Search nearby courts in seconds.</li>
-            <li>See availability at a glance.</li>
-            <li>Book and split costs instantly.</li>
-          `;
-          break;
-        case 'sports':
-          heading.innerText = 'Choose between different sports';
-          list.innerHTML = `
-            <li>Switch between sports in one place.</li>
-            <li>Find players at your level.</li>
-            <li>Keep your weekly games consistent.</li>
-          `;
-          break;
-        default:
-          return;
-      }
+    let allowedOrigin = null;
+    try {
+      allowedOrigin = new URL(iframe.src).origin;
+    } catch (e) {
+      // If iframe.src isn't a valid URL for any reason, don't process messages.
+      return;
     }
-
-    // Set initial copy
-    setBenefits('connect');
 
     window.addEventListener('message', (event) => {
       // 1) Must come from the iframe window
       if (event.source !== iframe.contentWindow) return;
       // 2) Must come from the iframe origin
-      if (event.origin !== allowedOrigin) return;      const message = typeof event.data === 'string' ? event.data : '';
-      setBenefits(message);
+      if (event.origin !== allowedOrigin) return;
+
+      switch (event.data) {
+        case 'connect':
+          heading.innerText = 'Everything you need to play, in one app.';
+          list.innerHTML = '';
+          break;
+        case 'courts':
+          heading.innerText = 'Find courts near you';
+          list.innerHTML = '';
+          break;
+        case 'sports':
+          heading.innerText = 'Choose between different sports';
+          list.innerHTML = '';
+          break;
+        default:
+          // Ignore unknown messages
+          return;
+      }
     });
   })();
 </script>
