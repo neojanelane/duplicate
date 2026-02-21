@@ -292,8 +292,6 @@ a { text-decoration: none; color: inherit; }
   margin-top: 8px;
 }
 
-/* (Removed) per-section gradients: the wrapper handles the fade now */
-
 /* ===== BUTTONS ===== */
 .btn {
   padding: 12px 18px;
@@ -308,11 +306,10 @@ a { text-decoration: none; color: inherit; }
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 
-
 .btn-primary {
   background: var(--orange);
   color: var(--white);
-  height: 48px; /* match input height for visual balance */
+  height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -321,13 +318,11 @@ a { text-decoration: none; color: inherit; }
 
 .btn-primary:hover { background: var(--coral); }
 
-
 /* ===== HERO ===== */
-/* Ensure the hero takes up the full mobile height */
 .hero {
   position: relative;
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Magic fix: Dynamic Viewport Height */
+  height: 100vh;
+  height: 100dvh;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -335,30 +330,26 @@ a { text-decoration: none; color: inherit; }
   justify-content: center;
 }
 
-/* Force the video to act like a background cover */
 .hero-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* This is the magic line that removes black edges */
-  object-fit: cover; 
+  object-fit: cover;
   z-index: -1;
 }
 
-/* Ensure the overlay also covers everything */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* Adjust tint as needed */
+  background: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
 
-/* Keep content centered and on top */
 .hero-content {
   position: relative;
   z-index: 1;
@@ -368,7 +359,6 @@ a { text-decoration: none; color: inherit; }
   padding: 0 20px;
 }
 
-/* Logo positioned top-left inside hero */
 .hero-logo {
   position: absolute;
   top: 30px;
@@ -387,8 +377,8 @@ a { text-decoration: none; color: inherit; }
   font-family: 'ZT Otez', 'Inter', sans-serif;
   font-size: clamp(36px, 5vw, 64px);
   line-height: 1.05;
-  margin: 0 0 15px; /* +10px extra space before subtext */
-  font-weight: 400; /* ZT Otez only has regular */
+  margin: 0 0 15px;
+  font-weight: 400;
   color: var(--white);
 }
 
@@ -407,6 +397,7 @@ a { text-decoration: none; color: inherit; }
   max-width: 520px;
   margin: 0 auto;
 }
+
 .hero-waitlist .waitlist-row {
   grid-template-columns: minmax(0, 1fr) auto;
 }
@@ -416,12 +407,10 @@ a { text-decoration: none; color: inherit; }
   text-align: left;
 }
 
-
-/* ===== ORIGIN STORY (FUTURE.CO STYLE UPGRADE) ===== */
+/* ===== ORIGIN STORY ===== */
 .hero--plain {
   position: relative;
   background-color: transparent;
-  /* Origin section only: full 0%→100% gradient (white → ice) + mesh accents */
   background-image:
     linear-gradient(to bottom, var(--white) 0%, var(--ice) 100%),
     radial-gradient(circle at 20% 30%, rgba(241, 109, 52, 0.18) 0%, transparent 50%),
@@ -432,10 +421,8 @@ a { text-decoration: none; color: inherit; }
   padding: 45px 0;
 }
 
-/* Removed pitch-line grid texture (squares) */
 .hero--plain::before { display: none; }
 
-/* Origin Content Layout */
 .origin {
   position: relative;
   z-index: 1;
@@ -445,7 +432,6 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
 }
 
-/* Glassmorphism Card for the text */
 .origin-copy {
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(12px);
@@ -463,8 +449,6 @@ a { text-decoration: none; color: inherit; }
   display: none;
 }
 
-/* Origin (2-column: image left, text right) */
-
 .origin-media {
   display: flex;
   justify-content: center;
@@ -476,7 +460,6 @@ a { text-decoration: none; color: inherit; }
   height: auto;
   display: block;
 }
-
 
 .plain-hero-title {
   font-family: 'ZT Otez', 'Inter', sans-serif;
@@ -494,18 +477,15 @@ a { text-decoration: none; color: inherit; }
   color: var(--midnight);
 }
 
-
 @media (max-width: 960px) {
   .container { padding: 0 24px; }
 
-  /* Hero logo placement */
   .hero-logo {
     top: 18px;
     left: 18px;
   }
   .hero-logo img { width: 26px; }
 
-  /* Origin stacks on mobile */
   .origin {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -516,7 +496,6 @@ a { text-decoration: none; color: inherit; }
   .origin-copy { text-align: center; }
   .plain-hero-sub { margin: 0 auto; }
 
-  /* Benefits stacks on mobile (fix iframe sliver/left align) */
   .benefits-flex-container {
     flex-direction: column;
     gap: 20px;
@@ -540,7 +519,6 @@ a { text-decoration: none; color: inherit; }
     margin-bottom: -80px;
   }
 
-  /* Personas: full-screen cards on mobile */
   .personas { padding: 0; }
   .personas-carousel { padding: 0; }
   .personas-track { gap: 0; }
@@ -555,7 +533,6 @@ a { text-decoration: none; color: inherit; }
     opacity: 1;
   }
 
-  /* Remove trim padding so the image is truly full-screen */
   .persona-stack { padding: 0; }
   .persona-img--top { height: 100%; min-height: 100%; border-radius: 0; }
 
@@ -575,7 +552,7 @@ a { text-decoration: none; color: inherit; }
   font-family: 'ZT Otez', 'Inter', sans-serif;
   font-size: 36px;
   margin: 0 0 12px;
-  font-weight: 400; /* regular only */
+  font-weight: 400;
   color: var(--midnight);
 }
 
@@ -584,7 +561,6 @@ a { text-decoration: none; color: inherit; }
   margin: 0 0 20px;
 }
 
-/* Accessible helper */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -640,7 +616,6 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.9;
 }
 
-/* Right-side visual (upload later: images/signup-blur.jpg) */
 .signup-visual {
   height: 260px;
   border-radius: var(--radius-lg);
@@ -651,11 +626,9 @@ a { text-decoration: none; color: inherit; }
   background-position: center;
 }
 
-/* ===== RESPONSIVE (layout) ===== */
 @media (max-width: 960px) {
   .container { padding: 0 24px; }
 
-  /* Signup */
   .signup { grid-template-columns: 1fr; }
 
   .waitlist-row {
@@ -735,8 +708,6 @@ a { text-decoration: none; color: inherit; }
   transform: scale(1.05);
   transition: 0.15s ease;
 }
-
-/* ===== RESPONSIVE ===== */
 
 @media (min-width: 961px) {
   .footer-grid {
