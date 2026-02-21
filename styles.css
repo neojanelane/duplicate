@@ -264,12 +264,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* Origin (2-column: image left, text right) */
-.origin {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* left = image, right = text */
-  gap: 32px;
-  align-items: center;
-}
 
 .origin-media {
   display: flex;
@@ -283,9 +277,6 @@ a { text-decoration: none; color: inherit; }
   display: block;
 }
 
-.origin-copy {
-  text-align: left;
-}
 
 .plain-hero-title {
   font-family: 'ZT Otez', 'Inter', sans-serif;
@@ -305,19 +296,6 @@ a { text-decoration: none; color: inherit; }
 
 
 @media (max-width: 960px) {
-  /* Keep logo from overlapping hero text on mobile */
-  .hero-logo {
-    top: 18px;
-    left: 18px;
-  }
-
-  .hero-logo img { width: 26px; }
-
-  .hero { padding-top: 150px; }
-
-  .hero-waitlist .waitlist-row { grid-template-columns: 1fr; }
-  .hero-waitlist .btn { width: 100%; }
-
   /* Origin stacks on mobile (image on top) */
   .origin {
     grid-template-columns: 1fr;
