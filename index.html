@@ -155,41 +155,6 @@
   })();
 </script>
 </section>
-    <!-- ================= SIGNUP ================= -->
-    <section id="waitlist" class="section section-ice section-ice--top" aria-label="Waitlist">
-      <div class="container signup">
-        <div class="signup-left">
-          <h2>Stop cancelling. Start playing.</h2>
-          <p class="signup-subtext">Join the waitlist now.</p>
-
-          <!-- Styled form (we can post to Google Sheets/Forms underneath later) -->
-          <form class="waitlist-form" action="#" method="post" novalidate>
-            <label class="sr-only" for="waitlist-email">Email</label>
-
-            <div class="waitlist-row">
-              <input
-                id="waitlist-email"
-                name="email"
-                type="email"
-                inputmode="email"
-                autocomplete="email"
-                placeholder="123@xxx.com"
-                required
-                aria-describedby="waitlist-error waitlist-success"
-              />
-
-              <button type="submit" class="btn btn-primary">Join Waitlist</button>
-            </div>
-
-            <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
-            <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
-          </form>
-        </div>
-
-        <!-- Visual placeholder (swap image later) -->
-        <div class="signup-visual" aria-hidden="true"></div>
-      </div>
-    </section>
     <!-- ================= PERSONA CAROUSEL ================= -->
     <section class="section section-ice section-ice--bottom personas" aria-label="Personas">
       <div class="personas-inner">
@@ -245,6 +210,42 @@
             </article>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= SIGNUP ================= -->
+    <section id="waitlist" class="section section-ice section-ice--top" aria-label="Waitlist">
+      <div class="container signup">
+        <div class="signup-left">
+          <h2>Stop cancelling. Start playing.</h2>
+          <p class="signup-subtext">Join the waitlist now.</p>
+
+          <!-- Styled form (we can post to Google Sheets/Forms underneath later) -->
+          <form class="waitlist-form" action="#" method="post" novalidate>
+            <label class="sr-only" for="waitlist-email">Email</label>
+
+            <div class="waitlist-row">
+              <input
+                id="waitlist-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="123@xxx.com"
+                required
+                aria-describedby="waitlist-error waitlist-success"
+              />
+
+              <button type="submit" class="btn btn-primary">Join Waitlist</button>
+            </div>
+
+            <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
+            <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in. We’ll email you when your first games go live.</p>
+          </form>
+        </div>
+
+        <!-- Visual placeholder (swap image later) -->
+        <div class="signup-visual" aria-hidden="true"></div>
       </div>
     </section>
 
