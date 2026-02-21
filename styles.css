@@ -555,8 +555,6 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 960px) {
-  .container { padding: 0 24px; }
-
   /* Keep logo from overlapping hero text on mobile */
   .hero-logo {
     top: 18px;
@@ -580,22 +578,6 @@ a { text-decoration: none; color: inherit; }
   .persona-card.is-active .persona-img--bottom { height: 140px; }
   .persona-overlay { padding: 16px; }
   .persona-sub { display: none; }
-
-  /* Signup */
-  .signup { grid-template-columns: 1fr; }
-
-  .waitlist-row {
-    grid-template-columns: 1fr;
-  }
-
-  .waitlist-row .btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .signup-visual {
-    height: 220px;
-  }
 }
 
 /* ===== SIGNUP ===== */
@@ -686,8 +668,11 @@ a { text-decoration: none; color: inherit; }
   background-position: center;
 }
 
-/* Ensure Signup stacks on mobile (placed AFTER the base .signup rules so it wins) */
+/* ===== RESPONSIVE (layout) ===== */
 @media (max-width: 960px) {
+  .container { padding: 0 24px; }
+
+  /* Signup */
   .signup { grid-template-columns: 1fr; }
 
   .waitlist-row {
