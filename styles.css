@@ -314,28 +314,7 @@ a { text-decoration: none; color: inherit; }
 .benefits-section .benefits-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 18px;
-  display: grid;
-  gap: 10px;
-}
-
-.benefits-section .benefits-list li {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 15px;
-  line-height: 1.35;
-  color: var(--midnight);
-  opacity: 0.92;
-}
-
-.benefits-section .benefits-list li::before {
-  content: "✓";
-  display: inline-block;
-  font-weight: 800;
-  line-height: 1;
-  margin-top: 2px;
-  color: var(--orange);
+  margin: 0;
 }
 
 .benefits-section .benefits-cta {
