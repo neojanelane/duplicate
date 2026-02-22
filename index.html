@@ -32,17 +32,20 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" aria-label="Hero">
-      <!-- Background video (upload: videos/hero-bg.mp4) -->
       <video class="hero-video" autoplay muted loop playsinline preload="none" poster="images/poster-image.jpeg">
-  <source src="videos/main-video.mp4" type="video/mp4" />
-</video>
+        <source src="videos/main-video.mp4" type="video/mp4" />
+      </video>
 
-      <!-- Blue overlay (same tint as original hero image setup) -->
       <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="element-glow glow-brand-orange" style="top: -50px; left: -50px;"></div>
 
       <div class="hero-logo" aria-label="Rulya logo">
         <img src="images/icon-logo.png" alt="Rulya" />
       </div>
+
+      <div class="container hero-content">
+        </div>
 
       <div class="container hero-content">
         <h1>Get the ball rolling</h1>
@@ -104,12 +107,10 @@
         Join Waitlist
       </a>
     </div>
-
-    <div class="mockup-container benefits-mockup">
-      <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
-    </div>
-  </div>
-
+<div class="mockup-container benefits-mockup" style="position: relative;">
+  <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+  <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
+</div>
   <script>
   (function () {
     // Only accept postMessage events from the embedded app iframe.
