@@ -100,6 +100,14 @@
     <path d="M12 21a9 9 0 0 0 0-10"/>
   </svg>
 </div>
+<div class="click-me-indicator">
+  <span class="click-me-text">Click me!</span>
+  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 14l-3-3-3 3"/>
+    <path d="M12 21a9 9 0 0 0 0-10"/>
+  </svg>
+</div>
+
 <style>
   .click-me-indicator {
     position: absolute;
@@ -108,13 +116,14 @@
     flex-direction: column;
     align-items: center;
     pointer-events: none;
-    /* Desktop Default Position */
-    bottom: 20px;
-    right: -60px; 
+    /* Desktop Default: Pinned to the right of the mockup */
+    bottom: 25px;
+    right: -65px;
   }
 
   .click-me-text {
-    font-family: 'Inter', sans-serif; /* Matches your hero font */
+    /* Uses Inter, the hero font of your website */
+    font-family: 'Inter', sans-serif; 
     font-weight: 800;
     color: #ff7a50;
     font-size: 16px;
@@ -128,11 +137,11 @@
     transform: rotate(-35deg) scaleX(-1);
   }
 
-  /* Mobile Fix: Moves the arrow closer to the bar on smaller screens */
+  /* Responsive Fix for Mobile/Tablet */
   @media (max-width: 960px) {
     .click-me-indicator {
       bottom: 15px;
-      right: 15px; /* Moves inside the mockup area for mobile */
+      right: 15px; /* Moves inside the mockup area to stay beside the bar */
     }
     .click-me-text {
       font-size: 14px;
