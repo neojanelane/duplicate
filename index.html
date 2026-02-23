@@ -93,22 +93,15 @@
 <div class="mockup-container benefits-mockup" style="position: relative;">
   <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
   <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
-<div class="click-me-indicator">
-  <span class="click-me-text">Click me!</span>
-  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M15 14l-3-3-3 3"/>
-    <path d="M12 21a9 9 0 0 0 0-10"/>
-  </svg>
-</div>
-<div class="click-me-indicator">
-  <span class="click-me-text">Click me!</span>
-  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M15 14l-3-3-3 3"/>
-    <path d="M12 21a9 9 0 0 0 0-10"/>
-  </svg>
-</div>
 
-<style>
+  <div class="click-me-indicator">
+    <span class="click-me-text">Click me!</span>
+    <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 14l-3-3-3 3"/>
+      <path d="M12 21a9 9 0 0 0 0-10"/>
+    </svg>
+  </div>
+</div> <style>
   .click-me-indicator {
     position: absolute;
     z-index: 100;
@@ -116,13 +109,13 @@
     flex-direction: column;
     align-items: center;
     pointer-events: none;
-    /* Desktop Default: Pinned to the right of the mockup */
-    bottom: 25px;
-    right: 300px;
+    /* Desktop: Positioned to the right of the phone mockup */
+    bottom: 30px;
+    right: -70px;
   }
 
   .click-me-text {
-    /* Uses Inter, the hero font of your website */
+    /* Set to your brand's Inter font with heavy weight */
     font-family: 'Inter', sans-serif; 
     font-weight: 800;
     color: #ff7a50;
@@ -137,11 +130,12 @@
     transform: rotate(-35deg) scaleX(-1);
   }
 
-  /* Responsive Fix for Mobile/Tablet */
+  /* Responsive Positioning */
   @media (max-width: 960px) {
     .click-me-indicator {
+      /* Mobile: Move inside the mockup area to point at the bar */
       bottom: 15px;
-      right: 15px; /* Moves inside the mockup area to stay beside the bar */
+      right: 15px; 
     }
     .click-me-text {
       font-size: 14px;
