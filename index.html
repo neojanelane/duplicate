@@ -119,23 +119,47 @@
       // 2) Must come from the iframe origin
       if (event.origin !== allowedOrigin) return;
 
+      <script>
+  (function () {
+    const iframe = document.querySelector('#benefits iframe.phone-mockup');
+    const heading = document.getElementById('main-heading');
+    const list = document.getElementById('benefit-list');
+
+    if (!iframe || !heading || !list) return;
+
+    let allowedOrigin = null;
+    try {
+      allowedOrigin = new URL(iframe.src).origin;
+    } catch (e) {
+      return;
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.source !== iframe.contentWindow) return;
+      if (event.origin !== allowedOrigin) return;
+
       switch (event.data) {
         case 'connect':
-          heading.innerText = 'Everything you need to play, in one app.';
-          list.innerHTML = '';
+          // Updated copy for "connect"
+          heading.innerText = 'Discover: Choose any game of your choice. Browse venues near you.';
+          list.innerHTML = ''; 
           break;
         case 'courts':
-          heading.innerText = 'Find courts near you';
+          // Updated copy for "courts"
+          heading.innerText = 'Join/Host: Join an existing game or host your own.';
           list.innerHTML = '';
           break;
         case 'sports':
-          heading.innerText = 'Choose between different sports';
+          // Updated copy for "sports"
+          heading.innerText = 'Game on: Choose your favourite sports with one click';
           list.innerHTML = '';
           break;
         default:
-          // Ignore unknown messages
           return;
       }
+    });
+  })();
+</script>
     });
   })();
 </script>
