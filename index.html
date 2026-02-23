@@ -36,44 +36,28 @@
         <source src="videos/main-video.mp4" type="video/mp4" />
       </video>
 
-      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true" style="z-index: 1;"></div>
 
-      <div class="element-glow glow-brand-orange" style="top: -50px; left: -50px;"></div>
+      <div class="element-glow glow-brand-orange" style="top: -120px; left: -120px;"></div>
 
-      <div class="hero-logo" aria-label="Rulya logo">
+      <div class="hero-logo" aria-label="Rulya logo" style="z-index: 3;">
         <img src="images/icon-logo.png" alt="Rulya" />
       </div>
 
-      <div class="container hero-content">
-        </div>
-
-      <div class="container hero-content">
+      <div class="container hero-content" style="z-index: 2;">
         <h1>Get the ball rolling</h1>
-
         <p class="hero-subtext">Instantly book local courts, join active matches, and connect with other players across Dublin.</p>
 
         <form class="waitlist-form hero-waitlist" action="#" method="post" novalidate>
           <label class="sr-only" for="hero-email">Email</label>
-
           <div class="waitlist-row">
-            <input
-              id="hero-email"
-              name="email"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              placeholder="123@xxx.com"
-              required
-              aria-describedby="hero-error hero-success"
-            />
-
+            <input id="hero-email" name="email" type="email" placeholder="123@xxx.com" required />
             <button type="submit" class="btn btn-primary">Join Waitlist</button>
           </div>
-
-          <p class="waitlist-error" id="hero-error" data-error hidden>Please provide a valid email to join the waitlist.</p>
+          <p class="waitlist-error" id="hero-error" data-error hidden>Please provide a valid email.</p>
           <p class="waitlist-success" id="hero-success" data-success hidden>You’re in.</p>
         </form>
-</div>
+      </div>
     </section>
 
     <div class="page-gradient">
