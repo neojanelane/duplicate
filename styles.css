@@ -28,9 +28,9 @@ html {
   position: absolute;
   z-index: 2; /* Increased to stay above the overlay/video */
   border-radius: 50%;
-  filter: blur(80px); 
+  filter: blur(80px);
   opacity: 0.7; /* Made slightly more visible */
-  pointer-events: none; 
+  pointer-events: none;
   mix-blend-mode: screen; /* Helps the color "glow" against the background */
 }
 
@@ -530,6 +530,15 @@ a { text-decoration: none; color: inherit; }
   }
   .hero-logo img { width: 26px; }
 
+  /* Hero waitlist: stack input + button on mobile */
+  .hero-waitlist .waitlist-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-waitlist .waitlist-row .btn {
+    width: 100%;
+  }
+
   /* Origin stacks on mobile */
   .origin {
     grid-template-columns: 1fr;
@@ -767,8 +776,9 @@ a { text-decoration: none; color: inherit; }
     grid-column: 1;
   }
 
+  /* Keep the social block left-aligned within its column */
   .footer-col--social {
     grid-column: 3;
-    align-items: flex-end;
+    align-items: flex-start;
   }
 }
