@@ -78,60 +78,123 @@
 
     <!-- ================= FEATURES / BENEFITS ================= -->
 <section id="benefits" class="benefits-section">
-      <div class="benefits-flex-container">
-        <div class="text-content benefits-text"> 
-          <h2 id="main-heading" class="plain-hero-title benefits-heading" style="transition: opacity 0.4s ease;">
-            </h2>
-          
-          <ul id="benefit-list" class="benefits-list"></ul>
 
-          <a href="#waitlist" class="btn btn-primary benefits-cta">
-            Secure Your Spot
-          </a>
-        </div>
+  <div class="benefits-flex-container">
+    <div class="text-content benefits-text"> 
+      <h2 id="main-heading" class="plain-hero-title benefits-heading">
+      </h2>
 
-        <div class="mockup-container benefits-mockup" style="position: relative;">
-          <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-          <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy" style="background-color: #ffffff; opacity: 1 !important;"></iframe>
-        </div>
-      </div>
+      <ul id="benefit-list" class="benefits-list"></ul>
 
-      <script>
-        (function () {
-          const heading = document.getElementById('main-heading');
-          const list = document.getElementById('benefit-list');
+      <a href="#waitlist" class="btn btn-primary benefits-cta">
+        Secure Your Spot
+      </a>
+    </div>
+<div class="mockup-container benefits-mockup" style="position: relative;">
+  <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+  <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
+<div class="click-me-indicator">
+  <span class="click-me-text">Click me!</span>
+  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 14l-3-3-3 3"/>
+    <path d="M12 21a9 9 0 0 0 0-10"/>
+  </svg>
+</div>
+<div class="click-me-indicator">
+  <span class="click-me-text">Click me!</span>
+  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 14l-3-3-3 3"/>
+    <path d="M12 21a9 9 0 0 0 0-10"/>
+  </svg>
+</div>
 
-          if (!heading) return;
+<style>
+  <div class="click-me-indicator">
+    <span class="click-me-text">Click me!</span>
+    <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 14l-3-3-3 3"/>
+      <path d="M12 21a9 9 0 0 0 0-10"/>
+    </svg>
+  </div>
+</div> <style>
+  .click-me-indicator {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    /* Desktop Default: Pinned to the right of the mockup */
+    bottom: 25px;
+    right: 300px;
+    /* Desktop: Positioned to the right of the phone mockup */
+    bottom: 30px;
+    right: -70px;
+  }
 
-          // The copy you want to cycle through
-          const copyOptions = [
-            'Join/Host: Join an existing game or host your own.',
-            'Discover: Browse venues near you.',
-            'Game on: Choose your favourite sport with one click.'
-          ];
+  .click-me-text {
+    /* Uses Inter, the hero font of your website */
+    /* Set to your brand's Inter font with heavy weight */
+    font-family: 'Inter', sans-serif; 
+    font-weight: 800;
+    color: #ff7a50;
+    font-size: 16px;
+    transform: rotate(12deg);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    text-shadow: 2px 2px 0px #fff;
+  }
 
-          let currentIndex = 0;
+  .click-me-arrow {
+    transform: rotate(-35deg) scaleX(-1);
+  }
 
-          // Set the initial text immediately on load
-          heading.innerText = copyOptions[0];
+  /* Responsive Fix for Mobile/Tablet */
+  /* Responsive Positioning */
+  @media (max-width: 960px) {
+    .click-me-indicator {
+      /* Mobile: Move inside the mockup area to point at the bar */
+      bottom: 15px;
+      right: 15px; /* Moves inside the mockup area to stay beside the bar */
+      right: 15px; 
+    }
+    .click-me-text {
+      font-size: 14px;
+    }
+    .click-me-arrow {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
+  </svg> </div>
+</div>
+<script>
+  (function () {
+    const heading = document.getElementById('main-heading');
+    const list = document.getElementById('benefit-list');
+
+    window.addEventListener('message', (event) => {
+      // Check console to verify message arrival
+      console.log("Rulya Message Received:", event.data);
+
+      switch (event.data) {
+        case 'connect':
+          heading.innerText = 'Join/Host: Join an existing game or host your own.';
           if (list) list.innerHTML = '';
-
-          // Auto-switch the text every 3.5 seconds
-          setInterval(() => {
-            // Fade text out
-            heading.style.opacity = '0';
-            
-            setTimeout(() => {
-              // Swap the text and fade back in
-              currentIndex = (currentIndex + 1) % copyOptions.length;
-              heading.innerText = copyOptions[currentIndex];
-              heading.style.opacity = '1';
-            }, 400); // This 400ms matches the transition time in the HTML above
-            
-          }, 3500); 
-        })();
-      </script>
-    </section>
+          break;
+        case 'courts':
+          heading.innerText = 'Discover: Browse venues near you.';
+          if (list) list.innerHTML = '';
+          break;
+        case 'sports':
+          heading.innerText = 'Game on: Choose your favourite sport with one click';
+          if (list) list.innerHTML = '';
+          break;
+      }
+    });
+  })();
+</script>
     <!-- ================= PERSONA CAROUSEL ================= -->
     <section class="section section-ice section-ice--bottom personas" aria-label="Personas">
       <div class="personas-inner">
