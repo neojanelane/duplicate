@@ -37,7 +37,7 @@
       </div>
 
       <div class="container hero-content" style="z-index: 2;">
-        <h1>dThe Easiest Way To Play</h1>
+        <h1>The Easiest Way To Play</h1>
         <p class="hero-subtext">Access local courts, join active matches and connect with other players in Dublin.</p>
 
         <form class="waitlist-form hero-waitlist" action="#" method="post" novalidate>
@@ -109,6 +109,7 @@
       <script>
         (function () {
           const section = document.getElementById('benefits');
+          const sticky = section ? section.querySelector('.sticky-wrapper') : null;
           const iframe = document.getElementById('app-iframe');
           const heading = document.getElementById('main-heading');
           const list = document.getElementById('benefit-list');
@@ -117,8 +118,17 @@
 
           let currentTab = 'connect'; // Starting state
 
+          // Show the pinned panel with a subtle slide-in as it enters view
+          function ensureVisible(rect) {
+            if (!sticky) return;
+            const threshold = window.innerHeight * 0.85;
+            if (rect.top < threshold) sticky.classList.add('is-visible');
+            else sticky.classList.remove('is-visible');
+          }
+
           window.addEventListener('scroll', () => {
             const rect = section.getBoundingClientRect();
+            ensureVisible(rect);
             
             // Calculate how far down the 300vh track we have scrolled (0.0 to 1.0)
             const scrollableDistance = rect.height - window.innerHeight;
