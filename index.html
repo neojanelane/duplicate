@@ -67,57 +67,95 @@
       </div>
     </section>
 
-    <section id="benefits" class="benefits-section">
-      <div class="benefits-flex-container">
-        <div class="text-content benefits-text"> 
-          <h2 id="main-heading" class="plain-hero-title benefits-heading" style="transition: opacity 0.4s ease;">
-            Join/Host: Join an existing game or host your own.
-          </h2>
+   <style>
+      /* Creates the tall track for scrolling */
+      .scroll-track {
+        height: 300vh; /* 3 times the screen height */
+        position: relative;
+      }
+      
+      /* Pins the content to the screen while you scroll down the track */
+      .sticky-wrapper {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+    </style>
+
+    <section id="benefits" class="scroll-track">
+      <div class="sticky-wrapper">
+        <div class="benefits-flex-container" style="width: 100%;">
           
-          <ul id="benefit-list" class="benefits-list"></ul>
+          <div class="text-content benefits-text"> 
+            <h2 id="main-heading" class="plain-hero-title benefits-heading" style="transition: opacity 0.4s ease;">
+              Join/Host: Join an existing game or host your own.
+            </h2>
+            <ul id="benefit-list" class="benefits-list"></ul>
+            <a href="#waitlist" class="btn btn-primary benefits-cta">
+              Secure Your Spot
+            </a>
+          </div>
 
-          <a href="#waitlist" class="btn btn-primary benefits-cta">
-            Secure Your Spot
-          </a>
-        </div>
+          <div class="mockup-container benefits-mockup" style="position: relative;">
+            <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            <iframe id="app-iframe" src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy" style="background-color: #ffffff; opacity: 1 !important; pointer-events: none;"></iframe>
+          </div>
 
-       <div class="mockup-container benefits-mockup" style="position: relative;">
-          <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-          <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy" style="background-color: #ffffff; opacity: 1 !important;"></iframe>
         </div>
       </div>
 
       <script>
         (function () {
+          const section = document.getElementById('benefits');
+          const iframe = document.getElementById('app-iframe');
           const heading = document.getElementById('main-heading');
           const list = document.getElementById('benefit-list');
 
-          if (!heading) return;
+          if (!heading || !section) return;
 
-          window.addEventListener('message', (event) => {
-            let newText = "";
+          let currentTab = 'connect'; // Starting state
+
+          window.addEventListener('scroll', () => {
+            const rect = section.getBoundingClientRect();
             
-            switch (event.data) {
-              case 'connect':
-                newText = 'Join/Host: Join an existing game or host your own.';
-                break;
-              case 'courts':
-                newText = 'Discover: Browse venues near you.';
-                break;
-              case 'sports':
-                newText = 'Game on: Choose your favourite sport with one click.';
-                break;
-              default:
-                return; // Ignore other messages
+            // Calculate how far down the 300vh track we have scrolled (0.0 to 1.0)
+            const scrollableDistance = rect.height - window.innerHeight;
+            let progress = -rect.top / scrollableDistance;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Determine which tab should be active based on scroll depth
+            let newTab = 'connect';
+            if (progress > 0.33 && progress <= 0.66) {
+              newTab = 'courts';
+            } else if (progress > 0.66) {
+              newTab = 'sports';
             }
 
-            // Smooth fade effect
-            heading.style.opacity = '0';
-            setTimeout(() => {
-              heading.innerText = newText;
-              if (list) list.innerHTML = '';
-              heading.style.opacity = '1';
-            }, 400);
+            // Only trigger if the tab actually changed
+            if (newTab !== currentTab) {
+              currentTab = newTab;
+
+              // Swap the website text with a smooth fade
+              let newText = '';
+              if (newTab === 'connect') newText = 'Join/Host: Join an existing game or host your own.';
+              if (newTab === 'courts') newText = 'Discover: Browse venues near you.';
+              if (newTab === 'sports') newText = 'Game on: Choose your favourite sport with one click.';
+
+              heading.style.opacity = '0';
+              setTimeout(() => {
+                heading.innerText = newText;
+                if (list) list.innerHTML = '';
+                heading.style.opacity = '1';
+              }, 400);
+
+              // Send message to the Vercel App to change its UI
+              if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage(newTab, '*');
+              }
+            }
           });
         })();
       </script>
