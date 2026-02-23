@@ -210,15 +210,15 @@
       </div>
     </section>
     <section id="waitlist" class="section section-ice section-ice--top" aria-label="Waitlist">
-      <div class="container signup">
-        <div class="signup-left">
+      <div class="container signup" style="display: flex; justify-content: center; text-align: center;">
+        <div class="signup-left" style="max-width: 600px; margin: 0 auto; padding-right: 0;">
           <h2>Stop cancelling. Start playing.</h2>
-          <p class="signup-subtext">Join the waitlist now.</p>
+          <p class="signup-subtext">Get Early Access Now.</p>
 
           <form class="waitlist-form" action="#" method="post" novalidate>
             <label class="sr-only" for="waitlist-email">Email</label>
 
-            <div class="waitlist-row">
+            <div class="waitlist-row" style="justify-content: center;">
               <input
                 id="waitlist-email"
                 name="email"
@@ -229,7 +229,6 @@
                 required
                 aria-describedby="waitlist-error waitlist-success"
               />
-
               <button type="submit" class="btn btn-primary">Secure Your Spot</button>
             </div>
 
@@ -237,41 +236,29 @@
             <p class="waitlist-success" id="waitlist-success" data-success hidden>You’re in.</p>
           </form>
         </div>
-
-        <div class="signup-visual" aria-hidden="true"></div>
       </div>
     </section>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-
-        <div class="footer-col footer-col--links">
-          <p class="footer-heading">Quick links</p>
-          <nav class="footer-links" aria-label="Quick links">
-            <a href="#">Additional menu item</a>
-            <a href="#">Additional menu item</a>
-            <a href="#">Additional menu item</a>
-          </nav>
-        </div>
+   <footer class="footer">
+      <div class="container footer-grid" style="display: flex; justify-content: flex-start; padding-bottom: 60px;">
 
         <div class="footer-col footer-col--social">
-          <p class="footer-heading">Social</p>
-          <div class="footer-icons" aria-label="Social links">
-            <a class="icon" href="#" aria-label="Instagram">
-              <img src="images/instagram.png" alt="Instagram">
+          <p class="footer-heading" style="margin-bottom: 20px;">Social</p>
+          <div class="footer-icons" aria-label="Social links" style="display: flex; gap: 24px;">
+            <a class="icon" href="#" aria-label="Instagram" style="width: 36px; height: 36px; display: inline-block;">
+              <img src="images/instagram.png" alt="Instagram" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
-            <a class="icon" href="#" aria-label="LinkedIn">
-              <img src="images/linkedin.png" alt="LinkedIn">
+            <a class="icon" href="#" aria-label="LinkedIn" style="width: 36px; height: 36px; display: inline-block;">
+              <img src="images/linkedin.png" alt="LinkedIn" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
-            <a class="icon" href="#" aria-label="TikTok">
-              <img src="images/tiktok.png" alt="TikTok">
+            <a class="icon" href="#" aria-label="TikTok" style="width: 36px; height: 36px; display: inline-block;">
+              <img src="images/tiktok.png" alt="TikTok" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
           </div>
         </div>
 
       </div>
     </footer>
-
     </div>
 
     <script>
@@ -388,7 +375,6 @@
                 <h2 class="persona-headline">${el.dataset.headline}</h2>
                 <p class="persona-sub">${el.dataset.sub}</p>
                 <p class="persona-trigger">${el.dataset.trigger}</p>
-                <a class="btn btn-primary" href="#waitlist">${el.dataset.cta}</a>
               `;
             } else {
               overlay.setAttribute('aria-hidden', 'true');
