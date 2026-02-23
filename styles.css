@@ -835,31 +835,3 @@ a { text-decoration: none; color: inherit; }
     justify-self: start;
   }
 }
-
-@media (min-width: 961px) {
-  .footer-grid {
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-  }
-
-  .footer-col--links {
-    grid-column: 1;
-  }
-
-  /* If we ever add more columns later, keep social on the left within its column */
-  .footer-col--social {
-    grid-column: 3;
-    align-items: flex-start;
-  }
-}
-
-  .footer-col--links {
-    grid-column: 1;
-  }
-
-  /* Keep the social block left-aligned within its column */
-  .footer-col--social {
-    grid-column: 3;
-    align-items: flex-start;
-  }
-}
