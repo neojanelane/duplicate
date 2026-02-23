@@ -539,38 +539,13 @@ a { text-decoration: none; color: inherit; }
   color: var(--midnight);
 }
 
-@media (max-width: 960px) {
-  /* Shorter hero on mobile so scroll is obvious */
-  .hero {
-    height: 78vh;
-    height: 78dvh;
+@media (max-width: 960px) {$1.hero--plain {
+    padding: 20px 0 72px; /* extra space so Origin fully clears before the sticky Benefits panel takes over */
   }
 
-  .container { padding: 0 24px; }
-
-  /* Hero logo placement */
-  .hero-logo {
-    top: 18px;
-    left: 18px;
-  }
-  .hero-logo img { width: 26px; }
-
-  /* HERO WAITLIST STACK ON MOBILE */
-  .hero-waitlist .waitlist-row {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-waitlist .waitlist-row .btn {
-    width: 100%;
-  }
-
-  /* Origin stacks on mobile */
-  .origin {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .hero--plain {
-    padding: 20px 0 28px;
+  /* Add a small gap before the scroll-story section starts on mobile */
+  #benefits.scroll-track {
+    margin-top: 16px;
   }
   .origin-copy { text-align: center; }
   .plain-hero-sub { margin: 0 auto; }
