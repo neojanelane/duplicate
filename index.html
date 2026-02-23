@@ -82,7 +82,6 @@
   <div class="benefits-flex-container">
     <div class="text-content benefits-text"> 
       <h2 id="main-heading" class="plain-hero-title benefits-heading">
-        A racket but no opponent?
       </h2>
       
       <ul id="benefit-list" class="benefits-list"></ul>
@@ -94,40 +93,38 @@
 <div class="mockup-container benefits-mockup" style="position: relative;">
   <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
   <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
-</div>
 <div class="click-me-indicator" style="position: absolute; bottom: 10px; right: 20px; z-index: 100; display: flex; flex-direction: column; align-items: center; pointer-events: none;">  <span style="font-family: 'Inter', sans-serif; font-weight: 800; color: #ff7a50; font-size: 16px; transform: rotate(12deg); margin-bottom: 8px; white-space: nowrap; text-shadow: 2px 2px 0px #fff;">Click me!</span>
   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(-35deg) scaleX(-1);">
     <path d="M15 14l-3-3-3 3"/>
     <path d="M12 21a9 9 0 0 0 0-10"/>
-  </svg>
+  </svg> </div>
 </div>
 <script>
-        (function () {
-          const heading = document.getElementById('main-heading');
-          const list = document.getElementById('benefit-list');
+  (function () {
+    const heading = document.getElementById('main-heading');
+    const list = document.getElementById('benefit-list');
 
-          window.addEventListener('message', (event) => {
-            // Check console to verify message arrival
-            console.log("Rulya Message Received:", event.data);
+    window.addEventListener('message', (event) => {
+      // Check console to verify message arrival
+      console.log("Rulya Message Received:", event.data);
 
-            switch (event.data) {
-              case 'connect':
-                heading.innerText = 'Join/Host: Join an existing game or host your own.';
-                if (list) list.innerHTML = '';
-                break;
-              case 'courts':
-                heading.innerText = 'Discover: Browse venues near you.';
-                if (list) list.innerHTML = '';
-                break;
-              case 'sports':
-                heading.innerText = 'Game on: Choose your favourite sport with one click';
-                if (list) list.innerHTML = '';
-                break;
-            }
-          });
-        })();
-      </script>
-</section>
+      switch (event.data) {
+        case 'connect':
+          heading.innerText = 'Join/Host: Join an existing game or host your own.';
+          if (list) list.innerHTML = '';
+          break;
+        case 'courts':
+          heading.innerText = 'Discover: Browse venues near you.';
+          if (list) list.innerHTML = '';
+          break;
+        case 'sports':
+          heading.innerText = 'Game on: Choose your favourite sport with one click';
+          if (list) list.innerHTML = '';
+          break;
+      }
+    });
+  })();
+</script>
     <!-- ================= PERSONA CAROUSEL ================= -->
     <section class="section section-ice section-ice--bottom personas" aria-label="Personas">
       <div class="personas-inner">
