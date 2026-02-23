@@ -81,11 +81,61 @@
           </a>
         </div>
 
-        <div class="mockup-container benefits-mockup" style="position: relative;">
+       <div class="mockup-container benefits-mockup" style="position: relative;">
           <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
           <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy" style="background-color: #ffffff; opacity: 1 !important;"></iframe>
-        </div>
-      </div>
+          
+          <div class="click-me-wrapper">
+            <span>Click me</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8c0-2.2-1.8-4-4-4H5"></path>
+              <path d="M5 4l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          </div>
+
+        <style>
+          .click-me-wrapper {
+            position: absolute;
+            bottom: 25px;
+            right: -110px; /* Pushed out on desktop */
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+          }
+          
+          .click-me-wrapper span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800; /* Heavy weight to match your hero fonts */
+            color: #ff7a50;
+            font-size: 16px;
+            white-space: nowrap;
+            text-shadow: 2px 2px 0px #fff; /* Gives it a white outline so it's readable if it overlaps the phone */
+          }
+
+          .click-me-wrapper svg {
+            width: 40px;
+            height: 40px;
+            transform: rotate(10deg);
+          }
+
+          /* Mobile Optimization */
+          @media (max-width: 960px) {
+            .click-me-wrapper {
+              right: -10px; /* Pulls it tight to the phone so it doesn't cause horizontal scrolling */
+              bottom: 10px;
+            }
+            .click-me-wrapper span {
+              font-size: 14px;
+            }
+            .click-me-wrapper svg {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        </style>
 
       <script>
         (function () {
