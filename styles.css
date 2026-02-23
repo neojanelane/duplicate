@@ -530,6 +530,15 @@ a { text-decoration: none; color: inherit; }
   }
   .hero-logo img { width: 26px; }
 
+  /* HERO WAITLIST STACK ON MOBILE */
+  .hero-waitlist .waitlist-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-waitlist .waitlist-row .btn {
+    width: 100%;
+  }
+
   /* Origin stacks on mobile */
   .origin {
     grid-template-columns: 1fr;
