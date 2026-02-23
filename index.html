@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -9,13 +8,10 @@
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-WXM4BDT8');
     </script>
-    <!-- End Google Tag Manager -->
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Rulya team sports finder</title>
 
-    <!-- Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,14 +19,10 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXM4BDT8"
       height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <!-- ================= HERO ================= -->
     <section class="hero" aria-label="Hero">
       <video class="hero-video" autoplay muted loop playsinline preload="none" poster="images/poster-image.jpeg">
         <source src="videos/main-video.mp4" type="video/mp4" />
@@ -62,7 +54,6 @@
 
     <div class="page-gradient">
 
-    <!-- ================= HERO (TEXT ONLY / SOLID BACKGROUND) ================= -->
     <section class="hero hero--plain" aria-label="Intro">
       <div class="container origin">
         <div class="origin-media" aria-hidden="true">
@@ -76,131 +67,66 @@
       </div>
     </section>
 
-    <!-- ================= FEATURES / BENEFITS ================= -->
-<section id="benefits" class="benefits-section">
+    <section id="benefits" class="benefits-section">
+      <div class="benefits-flex-container">
+        <div class="text-content benefits-text"> 
+          <h2 id="main-heading" class="plain-hero-title benefits-heading" style="transition: opacity 0.4s ease;">
+            Join/Host: Join an existing game or host your own.
+          </h2>
+          
+          <ul id="benefit-list" class="benefits-list"></ul>
 
-  <div class="benefits-flex-container">
-    <div class="text-content benefits-text"> 
-      <h2 id="main-heading" class="plain-hero-title benefits-heading">
-      </h2>
+          <a href="#waitlist" class="btn btn-primary benefits-cta">
+            Secure Your Spot
+          </a>
+        </div>
 
-      <ul id="benefit-list" class="benefits-list"></ul>
+        <div class="mockup-container benefits-mockup" style="position: relative;">
+          <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+          <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy" style="background-color: #ffffff; opacity: 1 !important;"></iframe>
+        </div>
+      </div>
 
-      <a href="#waitlist" class="btn btn-primary benefits-cta">
-        Secure Your Spot
-      </a>
-    </div>
-<div class="mockup-container benefits-mockup" style="position: relative;">
-  <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-  <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
-<div class="click-me-indicator">
-  <span class="click-me-text">Click me!</span>
-  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M15 14l-3-3-3 3"/>
-    <path d="M12 21a9 9 0 0 0 0-10"/>
-  </svg>
-</div>
-<div class="click-me-indicator">
-  <span class="click-me-text">Click me!</span>
-  <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M15 14l-3-3-3 3"/>
-    <path d="M12 21a9 9 0 0 0 0-10"/>
-  </svg>
-</div>
+      <script>
+        (function () {
+          const heading = document.getElementById('main-heading');
+          const list = document.getElementById('benefit-list');
 
-<style>
-  <div class="click-me-indicator">
-    <span class="click-me-text">Click me!</span>
-    <svg class="click-me-arrow" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ff7a50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 14l-3-3-3 3"/>
-      <path d="M12 21a9 9 0 0 0 0-10"/>
-    </svg>
-  </div>
-</div> <style>
-  .click-me-indicator {
-    position: absolute;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-    /* Desktop Default: Pinned to the right of the mockup */
-    bottom: 25px;
-    right: 300px;
-    /* Desktop: Positioned to the right of the phone mockup */
-    bottom: 30px;
-    right: -70px;
-  }
+          if (!heading) return;
 
-  .click-me-text {
-    /* Uses Inter, the hero font of your website */
-    /* Set to your brand's Inter font with heavy weight */
-    font-family: 'Inter', sans-serif; 
-    font-weight: 800;
-    color: #ff7a50;
-    font-size: 16px;
-    transform: rotate(12deg);
-    margin-bottom: 4px;
-    white-space: nowrap;
-    text-shadow: 2px 2px 0px #fff;
-  }
+          window.addEventListener('message', (event) => {
+            let newText = "";
+            
+            switch (event.data) {
+              case 'connect':
+                newText = 'Join/Host: Join an existing game or host your own.';
+                break;
+              case 'courts':
+                newText = 'Discover: Browse venues near you.';
+                break;
+              case 'sports':
+                newText = 'Game on: Choose your favourite sport with one click.';
+                break;
+              default:
+                return; // Ignore other messages
+            }
 
-  .click-me-arrow {
-    transform: rotate(-35deg) scaleX(-1);
-  }
+            // Smooth fade effect
+            heading.style.opacity = '0';
+            setTimeout(() => {
+              heading.innerText = newText;
+              if (list) list.innerHTML = '';
+              heading.style.opacity = '1';
+            }, 400);
+          });
+        })();
+      </script>
+    </section>
 
-  /* Responsive Fix for Mobile/Tablet */
-  /* Responsive Positioning */
-  @media (max-width: 960px) {
-    .click-me-indicator {
-      /* Mobile: Move inside the mockup area to point at the bar */
-      bottom: 15px;
-      right: 15px; /* Moves inside the mockup area to stay beside the bar */
-      right: 15px; 
-    }
-    .click-me-text {
-      font-size: 14px;
-    }
-    .click-me-arrow {
-      width: 40px;
-      height: 40px;
-    }
-  }
-</style>
-  </svg> </div>
-</div>
-<script>
-  (function () {
-    const heading = document.getElementById('main-heading');
-    const list = document.getElementById('benefit-list');
-
-    window.addEventListener('message', (event) => {
-      // Check console to verify message arrival
-      console.log("Rulya Message Received:", event.data);
-
-      switch (event.data) {
-        case 'connect':
-          heading.innerText = 'Join/Host: Join an existing game or host your own.';
-          if (list) list.innerHTML = '';
-          break;
-        case 'courts':
-          heading.innerText = 'Discover: Browse venues near you.';
-          if (list) list.innerHTML = '';
-          break;
-        case 'sports':
-          heading.innerText = 'Game on: Choose your favourite sport with one click';
-          if (list) list.innerHTML = '';
-          break;
-      }
-    });
-  })();
-</script>
-    <!-- ================= PERSONA CAROUSEL ================= -->
     <section class="section section-ice section-ice--bottom personas" aria-label="Personas">
       <div class="personas-inner">
         <div class="personas-carousel" data-persona-carousel>
           <div class="personas-track" data-persona-track aria-roledescription="carousel">
-            <!-- Persona 1 -->
             <article class="persona-card is-active" data-persona-slide
               data-name="Young Professional"
               data-headline="After work shouldn’t mean after 10 messages."
@@ -221,7 +147,6 @@
               </div>
             </article>
 
-            <!-- Persona 2 -->
             <article class="persona-card" data-persona-slide
               data-name="Expat / New in Dublin"
               data-headline="New city. No squad."
@@ -235,7 +160,6 @@
               <div class="persona-overlay" aria-hidden="true"></div>
             </article>
 
-            <!-- Persona 3 -->
             <article class="persona-card" data-persona-slide
               data-name="Student"
               data-headline="Midday class break? Tight budget?"
@@ -253,14 +177,12 @@
       </div>
     </section>
 
-    <!-- ================= SIGNUP ================= -->
     <section id="waitlist" class="section section-ice section-ice--top" aria-label="Waitlist">
       <div class="container signup">
         <div class="signup-left">
           <h2>Stop cancelling. Start playing.</h2>
           <p class="signup-subtext">Join the waitlist now.</p>
 
-          <!-- Styled form (we can post to Google Sheets/Forms underneath later) -->
           <form class="waitlist-form" action="#" method="post" novalidate>
             <label class="sr-only" for="waitlist-email">Email</label>
 
@@ -284,12 +206,10 @@
           </form>
         </div>
 
-        <!-- Visual placeholder (swap image later) -->
         <div class="signup-visual" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- ================= FOOTER ================= -->
     <footer class="footer">
       <div class="container footer-grid">
 
@@ -322,7 +242,6 @@
 
     </div>
 
-    <!-- ================= WAITLIST SCRIPT ================= -->
     <script>
       (function () {
         const forms = Array.from(document.querySelectorAll('.waitlist-form'));
@@ -407,7 +326,6 @@
       })();
     </script>
 
-    <!-- ================= PERSONA CAROUSEL SCRIPT ================= -->
     <script>
       (function () {
         const carousel = document.querySelector('[data-persona-carousel]');
