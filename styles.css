@@ -112,16 +112,18 @@ a { text-decoration: none; color: inherit; }
 
 /* Scroll-story section: make the pinned panel feel like it "slides in" */
 #benefits .sticky-wrapper {
-  background: var(--ice);
+  background-color: rgba(187, 224, 239, 0); /* fade the panel background in */
   z-index: 5;
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 420ms ease, transform 420ms ease;
+  transition: opacity 420ms ease, transform 420ms ease, background-color 420ms ease;
+  position: relative;
 }
 
 #benefits .sticky-wrapper.is-visible {
   opacity: 1;
   transform: translateY(0);
+  background-color: rgba(187, 224, 239, 1);
 }
 
 #benefits .sticky-wrapper::before {
