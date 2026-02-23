@@ -768,6 +768,8 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
+  /* Ensure the single-column footer content hugs the left edge of the container */
+  justify-items: start;
 }
 
 .footer-col {
@@ -825,6 +827,13 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.7;
   transform: scale(1.05);
   transition: 0.15s ease;
+}
+
+@media (max-width: 960px) {
+  /* Footer: ensure content starts at the left on mobile */
+  .footer-col--social {
+    justify-self: start;
+  }
 }
 
 @media (min-width: 961px) {
