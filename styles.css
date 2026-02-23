@@ -769,6 +769,6 @@ a { text-decoration: none; color: inherit; }
 
   .footer-col--social {
     grid-column: 3;
-    align-items: flex-end;
+    align-items: flex-start; /* left-align heading + icons within the column */
   }
 }
