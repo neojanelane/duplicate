@@ -95,24 +95,32 @@
   <div class="element-glow glow-brand-ice" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
   <iframe src="https://v0-rulya-social-booking-app-i2e1.vercel.app" class="phone-mockup" loading="lazy"></iframe>
 </div>
-  <script>
+ <script>
   (function () {
-    // Only accept postMessage events from the embedded app iframe.
-    // This avoids random scripts/iframes changing your Benefits text.
-    const iframe = document.querySelector('#benefits iframe.phone-mockup');
     const heading = document.getElementById('main-heading');
     const list = document.getElementById('benefit-list');
 
-    if (!iframe || !heading || !list) return;
+    window.addEventListener('message', (event) => {
+      // This helps you see if the message is arriving in your browser console
+      console.log("Rulya Message Received:", event.data);
 
-    let allowedOrigin = null;
-    try {
-      allowedOrigin = new URL(iframe.src).origin;
-    } catch (e) {
-      // If iframe.src isn't a valid URL for any reason, don't process messages.
-      return;
-    }
-
+      switch (event.data) {
+        case 'connect':
+          heading.innerText = 'Discover: Choose any game of your choice. Browse venues near you.';
+          if (list) list.innerHTML = '';
+          break;
+        case 'courts':
+          heading.innerText = 'Join/Host: Join an existing game or host your own.';
+          if (list) list.innerHTML = '';
+          break;
+        case 'sports':
+          heading.innerText = 'Game on: Choose your favourite sports with one click';
+          if (list) list.innerHTML = '';
+          break;
+      }
+    });
+  })();
+</script>
     window.addEventListener('message', (event) => {
       // 1) Must come from the iframe window
       if (event.source !== iframe.contentWindow) return;
