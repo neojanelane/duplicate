@@ -28,9 +28,9 @@ html {
   position: absolute;
   z-index: 2; /* Increased to stay above the overlay/video */
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(80px); 
   opacity: 0.7; /* Made slightly more visible */
-  pointer-events: none;
+  pointer-events: none; 
   mix-blend-mode: screen; /* Helps the color "glow" against the background */
 }
 
@@ -530,75 +530,11 @@ a { text-decoration: none; color: inherit; }
   }
   .hero-logo img { width: 26px; }
 
-  /* Hero waitlist: FORCE stack input + button on mobile */
-  .hero-waitlist .waitlist-row {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .hero-waitlist .waitlist-row input,
-  .hero-waitlist .waitlist-row .btn {
-    width: 100%;
-  }
-
   /* Origin stacks on mobile */
   .origin {
     grid-template-columns: 1fr;
     gap: 18px;
   }
-  .hero--plain {
-    padding: 20px 0 28px;
-  }
-  .origin-copy { text-align: center; }
-  .plain-hero-sub { margin: 0 auto; }
-
-  /* Benefits stacks on mobile (fix iframe sliver/left align) */
-  .benefits-flex-container {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  .benefits-text,
-  .benefits-mockup {
-    min-width: 0;
-    width: 100%;
-  }
-  .benefits-heading {
-    font-size: 28px;
-    margin-bottom: 15px;
-    line-height: 1.2;
-  }
-  .phone-mockup {
-    width: 320px;
-    height: 580px;
-    transform: scale(0.85);
-    transform-origin: top center;
-    margin-bottom: -80px;
-  }
-
-  /* Personas: full-screen cards on mobile */
-  .personas { padding: 0; }
-  .personas-carousel { padding: 0; }
-  .personas-track { gap: 0; }
-
-  .persona-card {
-    flex: 0 0 100vw;
-    max-width: none;
-    min-width: 100vw;
-    height: 100dvh;
-    border-radius: 0;
-    transform: none;
-    opacity: 1;
-  }
-
-  /* Remove trim padding so the image is truly full-screen */
-  .persona-stack { padding: 0; }
-  .persona-img--top { height: 100%; min-height: 100%; border-radius: 0; }
-
-  .persona-overlay { padding: 18px; }
-  .persona-sub { display: none; }
-}
   .hero--plain {
     padding: 20px 0 28px;
   }
@@ -768,20 +704,12 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
-  /* Ensure the single-column footer content hugs the left edge of the container */
-  justify-items: start;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-/* Ensure Social block is left-aligned by default */
-.footer-col--social {
-  align-items: flex-start;
-  text-align: left;
 }
 
 .footer-heading {
@@ -829,9 +757,18 @@ a { text-decoration: none; color: inherit; }
   transition: 0.15s ease;
 }
 
-@media (max-width: 960px) {
-  /* Footer: ensure content starts at the left on mobile */
+@media (min-width: 961px) {
+  .footer-grid {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .footer-col--links {
+    grid-column: 1;
+  }
+
   .footer-col--social {
-    justify-self: start;
+    grid-column: 3;
+    align-items: flex-end;
   }
 }
