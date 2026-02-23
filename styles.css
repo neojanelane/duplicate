@@ -428,7 +428,11 @@ a { text-decoration: none; color: inherit; }
 }
 
 .hero-waitlist .waitlist-row {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr;
+}
+
+.hero-waitlist .btn {
+  width: 100%;
 }
 
 .hero-waitlist .waitlist-error,
@@ -769,6 +773,7 @@ a { text-decoration: none; color: inherit; }
 
   .footer-col--social {
     grid-column: 3;
-    align-items: flex-end;
+    align-items: flex-start;
+    text-align: left;
   }
 }
