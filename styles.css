@@ -540,7 +540,7 @@ a { text-decoration: none; color: inherit; }
     gap: 18px;
   }
   .hero--plain {
-    padding: 20px 0 60px; /* extra space so the Origin "frame" isn't clipped */
+    padding: 20px 0 100px; /* extra space so the Origin "frame" isn't clipped */
     overflow: visible;   /* allow border/shadow to render fully on mobile */
   }
   .origin-copy { text-align: center; }
