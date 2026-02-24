@@ -37,14 +37,14 @@
       </div>
 
       <div class="container hero-content" style="z-index: 2;">
-        <h1>kThe Easiest Way To Play</h1>
+        <h1>The Easiest Way To Play</h1>
         <p class="hero-subtext">Access local courts, join active matches and connect with other players in Dublin.</p>
 
         <form class="waitlist-form hero-waitlist" action="#" method="post" novalidate>
           <label class="sr-only" for="hero-email">Email</label>
           <div class="waitlist-row">
             <input id="hero-email" name="email" type="email" placeholder="123@xxx.com" required />
-            <button type="submit" class="btn btn-primary">Secure Your Spot</button>
+            <button type="submit" class="btn btn-primary" id="btn-hero-secure" data-gtm="cta_secure_spot" data-section="hero">Secure Your Spot</button>
           </div>
           <p class="waitlist-error" id="hero-error" data-error hidden>Please provide a valid email.</p>
           <p class="waitlist-success" id="hero-success" data-success hidden>You’re in.</p>
@@ -94,9 +94,7 @@
               Join/Host: Join an existing game or host your own.
             </h2>
             <ul id="benefit-list" class="benefits-list"></ul>
-            <a href="#waitlist" class="btn btn-primary benefits-cta">
-              Secure Your Spot
-            </a>
+            <a href="#waitlist" class="btn btn-primary benefits-cta" id="btn-app-secure" data-gtm="cta_secure_spot" data-section="app">Secure Your Spot</a>
           </div>
 
           <div class="mockup-container benefits-mockup" style="position: relative;">
@@ -178,7 +176,7 @@
                 <h2 class="persona-headline">Your teammates are waiting</h2>
                 <p class="persona-sub">Easy Budgeting</p>
                 <p class="persona-trigger">Convenient Booking</p>
-                <a class="btn btn-primary" href="#waitlist">Join waitlist</a>
+                <a class="btn btn-primary" href="#waitlist" id="btn-persona-join-waitlist" data-gtm="cta_join_waitlist" data-section="app">Join waitlist</a>
               </div>
             </article>
 
@@ -228,7 +226,7 @@
                 required
                 aria-describedby="waitlist-error waitlist-success"
               />
-              <button type="submit" class="btn btn-primary">Secure Your Spot</button>
+              <button type="submit" class="btn btn-primary" id="btn-waitlist-secure" data-gtm="cta_secure_spot" data-section="waitlist">Secure Your Spot</button>
             </div>
 
             <p class="waitlist-error" id="waitlist-error" data-error hidden>Please provide a valid email.</p>
@@ -244,13 +242,13 @@
         <div class="footer-col footer-col--social">
           <p class="footer-heading" style="margin-bottom: 20px;">Social</p>
           <div class="footer-icons" aria-label="Social links" style="display: flex; gap: 24px;">
-            <a class="icon" href="https://www.instagram.com/rulya.ie?igsh=aG0zMXJwOG52dmF5" aria-label="Instagram" style="width: 36px; height: 36px; display: inline-block;">
+            <a class="icon" href="https://www.instagram.com/rulya.ie?igsh=aG0zMXJwOG52dmF5" aria-label="Instagram" id="footer-instagram" data-gtm="social_click" data-section="footer" data-platform="instagram" style="width: 36px; height: 36px; display: inline-block;">
               <img src="images/instagram.png" alt="Instagram" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
-            <a class="icon" href="https://www.linkedin.com/company/rulya/" aria-label="LinkedIn" style="width: 36px; height: 36px; display: inline-block;">
+            <a class="icon" href="https://www.linkedin.com/company/rulya/" aria-label="LinkedIn" id="footer-linkedin" data-gtm="social_click" data-section="footer" data-platform="linkedin" style="width: 36px; height: 36px; display: inline-block;">
               <img src="images/linkedin.png" alt="LinkedIn" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
-            <a class="icon" href="https://www.tiktok.com/@rulya.ie?_r=1&_t=ZN-94AXZZVxG3a" aria-label="TikTok" style="width: 36px; height: 36px; display: inline-block;">
+            <a class="icon" href="https://www.tiktok.com/@rulya.ie?_r=1&_t=ZN-94AXZZVxG3a" aria-label="TikTok" id="footer-tiktok" data-gtm="social_click" data-section="footer" data-platform="tiktok" style="width: 36px; height: 36px; display: inline-block;">
               <img src="images/tiktok logo.png" alt="TikTok" style="width: 100%; height: 100%; object-fit: contain;">
             </a>
           </div>
@@ -259,88 +257,46 @@
       </div>
     </footer>
     </div>
+    $1
 
     <script>
+      // Conversion tracking: fire ONLY on valid waitlist form submissions (no email captured)
       (function () {
-        const forms = Array.from(document.querySelectorAll('.waitlist-form'));
-        if (!forms.length) return;
+        const dl = (window.dataLayer = window.dataLayer || []);
 
-        const FORM_ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse';
-        const FORM_FIELD = 'entry.1326819543';
-
-        function isEmailValid(input) {
-          // Uses native browser validation for type="email".
-          // Also trims whitespace so " test@x.com " doesn't fail.
-          const v = (input.value || '').trim();
-          input.value = v;
-          return v.length > 0 && input.checkValidity();
+        function getSection(formEl) {
+          // If it's inside the hero section, label it hero; otherwise use nearest section id or 'waitlist'
+          if (formEl.classList.contains('hero-waitlist')) return 'hero';
+          const nearestSection = formEl.closest('section');
+          return (nearestSection && (nearestSection.id || nearestSection.getAttribute('aria-label'))) || 'waitlist';
         }
 
-        forms.forEach((form) => {
-          const input = form.querySelector('input[type="email"]');
-          const success = form.querySelector('[data-success]');
-          const error = form.querySelector('[data-error]');
+        function attach(formEl) {
+          if (!formEl) return;
+          // Prevent double-binding
+          if (formEl.dataset.boundSubmit === '1') return;
+          formEl.dataset.boundSubmit = '1';
 
-          if (!input || !success || !error) return;
+          formEl.addEventListener('submit', function (e) {
+            // Let native validation run first
+            const emailInput = formEl.querySelector('input[type="email"]');
+            const isValid = formEl.checkValidity() && emailInput && emailInput.value && emailInput.validity.valid;
 
-          function resetMessages() {
-            success.hidden = true;
-            error.hidden = true;
-          }
-
-          form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            resetMessages();
-
-            if (!input.value || !input.value.trim()) {
-              error.textContent = 'Please provide your email to join the waitlist.';
-              error.hidden = false;
-              input.focus();
+            if (!isValid) {
+              // allow your existing UI to show errors (or browser bubble)
               return;
             }
 
-            if (!isEmailValid(input)) {
-              error.textContent = 'Please provide a valid email to join the waitlist.';
-              error.hidden = false;
-              input.focus();
-              return;
-            }
-
-            // Send to Google Forms (stores in Google Sheets)
-            // NOTE: This uses mode:no-cors, so we can't read a success response.
-            // We treat 'no network error thrown' as success.
-            try {
-              const fd = new FormData();
-              fd.append(FORM_FIELD, input.value);
-
-              await fetch(FORM_ENDPOINT, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: fd,
-              });
-            } catch (err) {
-              error.textContent = 'Something went wrong. Please try again.';
-              error.hidden = false;
-              return;
-            }
-
-            success.hidden = false;
-
-            // Fire GTM event ONLY on valid submit
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
+            // Fire conversion event for GTM
+            dl.push({
               event: 'waitlist_submit',
-              form_location: form.classList.contains('hero-waitlist') ? 'hero' : 'waitlist_section',
+              section: getSection(formEl),
+              form_id: formEl.classList.contains('hero-waitlist') ? 'hero_waitlist' : 'footer_waitlist',
             });
+          }, { passive: true });
+        }
 
-            input.value = '';
-          });
-
-          input.addEventListener('input', function () {
-            if (error && !error.hidden) error.hidden = true;
-          });
-        });
+        document.querySelectorAll('form.waitlist-form').forEach(attach);
       })();
     </script>
 
