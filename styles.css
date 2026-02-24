@@ -540,11 +540,20 @@ a { text-decoration: none; color: inherit; }
     gap: 18px;
   }
   .hero--plain {
-    padding: 20px 0 100px; /* extra space so the Origin "frame" isn't clipped */
+    padding: 20px 0 44px; /* extra space so the Origin "frame" isn't clipped */
     overflow: visible;   /* allow border/shadow to render fully on mobile */
+    position: relative;
+    z-index: 2;          /* ensure Origin card stays above the next section's content */
   }
   .origin-copy { text-align: center; }
   .plain-hero-sub { margin: 0 auto; }
+
+  /* Create real separation BEFORE the sticky track starts (prevents "covering" as soon as Benefits enters view) */
+  #benefits {
+    padding-top: 24px;   /* increase if you want more clearance */
+    position: relative;
+    z-index: 1;
+  }
 
   /* Benefits stacks on mobile (fix iframe sliver/left align) */
   .benefits-flex-container {
@@ -572,8 +581,9 @@ a { text-decoration: none; color: inherit; }
 
   /* Mobile fix: stop the sticky Join/Host panel from covering the end of Origin Story */
   #benefits .sticky-wrapper {
-    top: 18px; /* pushes the sticky content down slightly */
+    top: 18px; /* pushes the sticky content down slightly once it becomes sticky */
     height: calc(100dvh - 18px);
+    overflow: visible;  /* avoid clipping shadows/frames at the boundary */
   }
 
 
