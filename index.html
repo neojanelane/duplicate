@@ -40,7 +40,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1>The Easiest Way To Play</h1>
         <p class="hero-subtext">Access local courts, join active matches and connect with other players in Dublin.</p>
 
-        <form class="waitlist-form hero-waitlist" action="#" method="post" novalidate>
+        <form class="waitlist-form hero-waitlist" novalidate>
           <label class="sr-only" for="hero-email">Email</label>
           <div class="waitlist-row">
             <input id="hero-email" name="email" type="email" placeholder="123@xxx.com" required />
@@ -212,7 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h2>Stop cancelling. Start playing.</h2>
           <p class="signup-subtext">Get Early Access Now.</p>
 
-          <form class="waitlist-form" action="#" method="post" novalidate>
+          <form class="waitlist-form" novalidate>
             <label class="sr-only" for="waitlist-email">Email</label>
 
             <div class="waitlist-row" style="justify-content: center;">
@@ -259,40 +259,93 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <script>
-      // Conversion tracking: fire ONLY on valid waitlist form submissions (no email captured)
+      // Waitlist submit: validate, prevent GitHub Pages POST/405, send to Google Forms, show on-page success, keep GTM tracking
       (function () {
+        const GOOGLE_FORM_ENDPOINT =
+          'https://docs.google.com/forms/d/e/1FAIpQLSdFKlPUzqqatqOZuyYkz--8ABrA1dQ-wD-i5rlxLm02iBipzw/formResponse';
+        const GOOGLE_EMAIL_ENTRY_ID = 'entry.1326819543';
+
         const dl = (window.dataLayer = window.dataLayer || []);
 
-        function getSection(formEl) {
-          // If it's inside the hero section, label it hero; otherwise use nearest section id or 'waitlist'
-          if (formEl.classList.contains('hero-waitlist')) return 'hero';
-          const nearestSection = formEl.closest('section');
-          return (nearestSection && (nearestSection.id || nearestSection.getAttribute('aria-label'))) || 'waitlist';
+        function showState(formEl, state) {
+          const successEl = formEl.querySelector('[data-success]');
+          const errorEl = formEl.querySelector('[data-error]');
+
+          if (state === 'success') {
+            if (successEl) successEl.hidden = false;
+            if (errorEl) errorEl.hidden = true;
+          } else if (state === 'error') {
+            if (errorEl) errorEl.hidden = false;
+            if (successEl) successEl.hidden = true;
+          } else {
+            // reset
+            if (successEl) successEl.hidden = true;
+            if (errorEl) errorEl.hidden = true;
+          }
+        }
+
+        function getMeta(formEl) {
+          const isHero = formEl.classList.contains('hero-waitlist');
+          return {
+            section: isHero ? 'hero' : 'waitlist',
+            form_id: isHero ? 'hero_waitlist' : 'waitlist',
+          };
         }
 
         function attach(formEl) {
           if (!formEl) return;
-          // Prevent double-binding
           if (formEl.dataset.boundSubmit === '1') return;
           formEl.dataset.boundSubmit = '1';
 
           formEl.addEventListener('submit', function (e) {
-            // Let native validation run first
+            // Always prevent default so GitHub Pages never receives a POST (avoids 405)
+            e.preventDefault();
+
             const emailInput = formEl.querySelector('input[type="email"]');
-            const isValid = formEl.checkValidity() && emailInput && emailInput.value && emailInput.validity.valid;
+            const email = emailInput ? String(emailInput.value || '').trim() : '';
+
+            const isValid =
+              formEl.checkValidity() &&
+              emailInput &&
+              email.length > 0 &&
+              emailInput.validity &&
+              emailInput.validity.valid;
 
             if (!isValid) {
-              // allow your existing UI to show errors (or browser bubble)
+              showState(formEl, 'error');
               return;
             }
 
-            // Fire conversion event for GTM
+            // GTM tracking on valid submission
+            const meta = getMeta(formEl);
             dl.push({
               event: 'waitlist_submit',
-              section: getSection(formEl),
-              form_id: formEl.classList.contains('hero-waitlist') ? 'hero_waitlist' : 'footer_waitlist',
+              section: meta.section,
+              form_id: meta.form_id,
             });
-          }, { passive: true });
+
+            // UI: optimistic success message (no-cors prevents reading response reliably)
+            showState(formEl, 'success');
+
+            // Send to Google Forms
+            const body = new URLSearchParams();
+            body.set(GOOGLE_EMAIL_ENTRY_ID, email);
+
+            fetch(GOOGLE_FORM_ENDPOINT, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: body.toString(),
+            }).catch(function () {
+              // With no-cors we can't reliably inspect failures; keep success UI to avoid blocking UX.
+              // If you prefer, swap to: showState(formEl, 'error');
+            });
+
+            // Clear email field (preferred)
+            if (emailInput) emailInput.value = '';
+          });
         }
 
         document.querySelectorAll('form.waitlist-form').forEach(attach);
