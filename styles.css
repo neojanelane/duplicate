@@ -569,6 +569,13 @@ a { text-decoration: none; color: inherit; }
     margin-bottom: -80px;
   }
 
+  /* Mobile fix: stop the sticky Join/Host panel from covering the end of Origin Story */
+  #benefits .sticky-wrapper {
+    top: 18px; /* pushes the sticky content down slightly */
+    height: calc(100dvh - 18px);
+  }
+
+
   /* Personas: full-screen cards on mobile */
   .personas { padding: 0; }
   .personas-carousel { padding: 0; }
